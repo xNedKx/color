@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Image Color Analyse</title>
+<script src="cc-min.js"></script>
+<style>
+document,body { margin: 0; }
+#all { padding: 6px 8px; }
+.color { width: 100px; height: 20px; box-shadow: 0 0 2px #333; }
+.cb { position: relative; }
+.cb > div { width: 2px; bottom: 0; position: absolute; }
+</style>
+</head>
+<body>
+<div id="all">
+<div>
+<h2>Image Analyse</h2>
+<div style="font-size: small; color: #666;"></div>
+</div>
+<div>
+<input type="file" accept="image/jpeg, image/png, image/gif" id="file"/>
+<input type="button" value="Analyse" id="analyse" disabled />
+<div id="msg"></div>
+</div>
+<div><canvas id="can" width="0" height="0"></canvas></div>
+<div id="colors"></div>
+<div id="keys"></div>
+</div>
+<script>
+function setup(){
+var worker = new Worker("cc_analyse.js"),
+    canvas = document.getElementById("can"),
+    cc = canvas.getContext("2d"),
+    all = document.getElementById("all"),
+    ban = document.getElementById("analyse"),
+    file = document.getElementById("file"),
+    crs = document.getElementById("colors"),
+    keys = document.getElementById("keys"),
+    img, data
+function upload(){
+    if(file.files.length){
+        clear()
+        img = new Image()
+        img.addEventListener( "load", img_load, false )
+        img.src = URL.createObjectURL( file.files[0] )
+    }
+}
+function img_load(){
+    canvas.width = img.naturalWidth
+    canvas.height = img.naturalHeight
+    cc.drawImage( img, 0, 0, img.naturalWidth, img.naturalHeight )
+    URL.revokeObjectURL( img.src )
+    data = cc.getImageData( 0, 0, canvas.width, canvas.height )
+}
+function allow_proc(){
+    ban.value = "Analyse"
+    ban.disabled = false
+    ban.addEventListener("click", analyse, false)
+}
+function no_proc(){
+    ban.value = "Analysing"
+    ban.removeEventListener("click", analyse, false)
+    ban.disabled = true
+}
+function allow_load(){
+    file.addEventListener("change", upload, false)
+    file.disabled = false
+}
+function no_load(){
+    file.removeEventListener("change", upload, false)
+    file.disabled = true
+}
+function clear(){
+    crs.innerHTML = ""
+    keys.innerHTML = ""
+}
+function analyse(){
+    clear()
+    no_proc()
+    no_load()
+    all.style.cursor = "progress"
+    worker.postMessage(data)
+    worker.addEventListener("message", getPostMsg, false)
+}
+function getPostMsg(e){
+    var td = document.createElement("div")
+    td = document.createElement("div")
+    td.textContent = e.data.values.length + " Total Colors"
+    crs.appendChild(td)
+    td = document.createElement("div")
+    td.textContent = "Primative Colors"
+    crs.appendChild(td)
+    e.data.rs.forEach(function(v){
+        var dom = document.createElement("div"), c = Color(v.v).truncate()
+        dom.appendChild(document.createElement("div"))
+        dom.appendChild(document.createElement("div"))
+        var f = dom.firstChild, l = dom.lastChild
+        f.textContent = c.hex()
+        l.title = v.n
+        l.className = "color"
+        l.style.backgroundColor = c.css()
+        crs.appendChild(dom)
+    })
+    var mean = new Color(e.data.mean)
+    td = document.createElement("div")
+    td.textContent = "Mean Color"
+    crs.appendChild(td)
+    td = document.createElement("div")
+    td.innerHTML = "<div>"+mean.hex()+"</div><div class='color' style='background-color:"+mean.css()+";' title='"+mean.css()+"'></div>"
+    crs.appendChild(td)
+    var mode = e.data.mode.map(function(v){return new Color(v)})
+    td = document.createElement("div")
+    td.textContent = "Mode Color"
+    crs.appendChild(td)
+    mode.forEach(function(c){
+        td = document.createElement("div")
+        td.innerHTML = "<div>"+c.hex()+"</div><div class='color' style='background-color:"+c.css()+";' title='"+c.css()+"'></div>"
+        crs.appendChild(td)
+    })
+    td = document.createElement("div")
+    td.textContent = "Keys"
+    keys.appendChild(td)
+    var h = 256
+    Object.keys(e.data.keys).forEach(function(k){
+        var d = document.createElement("div"), vs = e.data.keys[k].values.sort(function(a,b){return a.v-b.v}).map(function(v){return v.n}), r = data.data.length/vs.length
+        d.appendChild(document.createElement("div"))
+        d.firstChild.textContent = k.toUpperCase()
+        d.appendChild(document.createElement("div"))
+        d.lastChild.style.height = h+"px"
+        d.lastChild.className = "cb"
+        vs.forEach(function(v, i){
+            var b = document.createElement("div"), cr = new Color()
+            cr[k] = i
+            b.style.height = Math.min(v/r,1)*h + "px"
+            b.style.backgroundColor = cr.hex()
+            b.style.left = 2*i + "px"
+            b.title = k.toUpperCase() + i + ": " + v
+            d.lastChild.appendChild(b)
+        })
+        keys.appendChild(d)
+    })
+    allow_proc()
+    allow_load()
+    all.style.cursor = ""
+    worker.removeEventListener("message", getPostMsg, false)
+}
+
+file.addEventListener("change", upload, false)
+allow_proc()
+upload()
+}
+window.addEventListener("load", setup, false)
+</script>
+</body>
+</html>

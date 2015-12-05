@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Color palette</title>
+<link rel="stylesheet" href="hp-min.css">
+<script src="cc-min.js"></script>
+<script src="hp-min.js"></script>
+</head>
+<body>
+<div id="pointer"></div>
+<div id="picker" class="left">
+<div id="canvas"><canvas id="c" width="256" height="256"></canvas></div>
+<div class="border left"><div class="box"><div id="h" data-value="0"></div></div></div>
+<div class="inp left"><div class="abs">H:</div><input id="hi" maxlength=6/></div>
+<div class="border left"><div class="box"><div id="s" data-value="0"></div></div></div>
+<div class="inp left"><div class="abs">S:</div><input id="si" maxlength=6/></div>
+<div class="border left"><div class="box"><div id="v" data-value="0"></div></div></div>
+<div class="inp left"><div class="abs">V:</div><input id="vi" maxlength=6/></div>
+<div class="border left"><div class="box"><div id="a" data-value="1"></div></div></div>
+<div class="inp left"><div class="abs">A:</div><input id="ai" maxlength=6/></div>
+<div class="left group">
+<div class="title"> Load color </div>
+<div><form id="form"><input type="text" id="load" title="Accepted form:
+ Hex in 3/6 digit with or without leading hash.
+ Coma separated values with leading mode name
+ or without mode name (default to RGB).
+ CSS color (color name not supported).
+Ex:
+ [ f0f0f0 ] [ #fff ]
+ [ 255, 0, 255 ] [ lab, 50, 30, -6 ]
+ [ rgba( 12, 34, 56, 0.6 ) ]
+"></form></div>
+</div>
+<div class="left group"><div id="icon"></div></div>
+<div class="left group">
+<div class="mid title"><div class="font-small left">(small)</div>Size<div class="font-small right">(large)</div></div>
+<div class="mid">
+<div class="radio left"><label><input type="radio" name="size" id="l-xs" value="line_xs"/></label></div>
+<div class="radio left"><label><input type="radio" name="size" id="l-s" value="line_s"/></label></div>
+<div class="radio left"><label><input type="radio" name="size" id="l-m" value="line_m"/></label></div>
+<div class="radio left"><label><input type="radio" name="size" id="l-l" value="line_l"/></label></div>
+<div class="radio left"><label><input type="radio" name="size" id="l-xl" value="line_xl"/></label></div>
+<div class="radio left"><label><input type="radio" name="size" id="b-xs" value="xs" checked/></label></div>
+<div class="radio left"><label><input type="radio" name="size" id="b-s" value="s"/></label></div>
+<div class="radio left"><label><input type="radio" name="size" id="b-m" value="m"/></label></div>
+<div class="radio left"><label><input type="radio" name="size" id="b-l" value="l"/></label></div>
+<div class="radio left"><label><input type="radio" name="size" id="b-xl" value="xl"/></label></div>
+</div>
+</div>
+<div class="left group">
+<div class="title"> Basic </div>
+<div class="button s1" id="add">add current</div>
+<div class="button s3 l left" id="invert">invert</div>
+<div class="button s3 left" id="light_contrast">contrast-l</div>
+<div class="button s3 r right" id="contrast_with">contrast-2</div>
+<div class="button s1 left" id="grayscale">grayscale</div>
+</div>
+<div class="left group">
+<div class="title"> Hue </div>
+<div class="button s3 w2 l left" id="hue_hsv">hsv / hsl</div>
+<div class="button s3 r right" id="hue_lch">lch</div>
+</div>
+<div class="left group">
+<div class="title"> Chroma </div>
+<div class="button s3 l left" id="saturation_hsv">HSV<br>saturation</div>
+<div class="button s3 left" id="saturation_hsl">HSL<br>saturation</div>
+<div class="button s3 r right" id="chroma_lch">LCH<br>chroma</div>
+</div>
+<div class="left group">
+<div class="title"> Lightness </div>
+<div class="button s2 l left" id="lightness_hsv">hsv</div>
+<div class="button s2 r right" id="lightness_hsl">hsl</div>
+<div class="button s1 left" id="lightness_lab">lab / luv / lch</div>
+</div>
+<div class="left group">
+<div class="title"> Toggle </div>
+<div class="button s2 l left" id="toggle_detail" title="( Ctrl + D )">detail</div>
+<div class="button s2 r right" id="toggle_sep" title="( Ctrl + S )">separate</div>
+<div class="button s2 l left" id="toggle_sel_all" title="( Ctrl + A )">select all</div>
+<div class="button s2 r right" id="toggle_sel" title="( Ctrl + E )">select current</div>
+</div>
+<div class="left group">
+<div class="title"> Clear colors </div>
+<div class="button s2 l left" id="clear">clear all</div>
+<div class="button s2 r right" id="clear_sel" title="( Delete )">clear selected</div>
+</div>
+</div>
+<div id="main" class="left"></div>
+<div class="clear"></div>
+</body>
+</html>

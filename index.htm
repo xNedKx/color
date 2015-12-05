@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="./favicon.png" />
+<meta property="og:url" content="https://xnedkx.github.io/color/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="CC.js - color class for js"/>
+<meta property="og:site_name" content="xNedKx" />
+<meta property="og:description" content="CC.js 的核心提供色彩模式之間的簡易轉換與多種色彩調整、混合及產生的功能。支援hex、css樣式字串的解析與輸出，並提供css漸層代碼生成。以及其他額外功能。" />
+<meta property="og:image" content="https://xnedkx.github.io/color/fb-img.png"/>
+<meta property="og:image" content="https://xnedkx.github.io/color/fb-img-icon.png"/>
+<link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz|Passion+One|Bitter' rel='stylesheet' type='text/css'>
+<script src="./cc-min.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<title>xNedKx | CC.js | color class for js</title>
+<style>
+document, body
+{
+    margin: 0;
+    font-family: 'Bitter', serif;
+    font-size: 16px;
+    color: #404040;
+    background-color: #c0c0c0;
+    text-shadow: 0 0 0.1em rgba( 0, 0, 0, 0.2 );
+}
+@media only screen and (max-width: 720px)
+{
+    document, body
+    {
+        font-size: 14px;
+    }
+}
+@media only screen and (max-width: 480px)
+{
+    document, body
+    {
+        font-size: 12px;
+    }
+    .sbr
+    {
+        display: inline-block !important;
+    }
+}
+::selection
+{
+    color: #f0f0f0;
+    background-color: #404040;
+    text-shadow: 0 0 0.05em rgba( 255, 255, 255, 0.2 );
+}
+a[href]
+{
+    text-decoration: none;
+    color: #1E72AD;
+    text-shadow: 0 0 0.1em rgba( 30, 114, 173, 0.2 );
+}
+.sub-title a[href], .sub-title a[href]:active, .sub-title a[href]:visited
+{
+    color: #404040;
+    text-shadow: 0 0 0.1em rgba( 0, 0, 0, 0.2 );
+}
+a[href]:hover
+{
+    text-decoration: underline;
+}
+a[href]:active
+{
+    color: #A85454;
+    text-shadow: 0 0 0.1em rgba( 168, 84, 84, 0.2 );
+}
+a[href]:visited
+{
+    color: #8F5B92;
+    text-shadow: 0 0 0.1em rgba( 143, 91, 146, 0.2 );
+}
+#all
+{
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 720px;
+    background-color: #f6f6f6;
+    box-shadow: 0 0 1em rgba( 0, 0, 0, 0.4 );
+    overflow: hidden;
+}
+#header
+{
+    font-family: 'Passion One', cambria, sans-serif;
+    position: relative;
+    text-align: center;
+    cursor: default;
+    z-index: 20;
+    background-color: #ffffff;
+    border-bottom: 0.1em solid rgba( 0, 0, 0, 0.1 );
+    overflow: hidden;
+}
+#header h1
+{
+    font-size: 2.4em;
+    font-weight: normal;
+    margin: 0;
+    padding: 0.2em 0;
+    color: #404040;
+    background-color: transparent;
+    text-shadow: 0 0 0.2em rgba( 0, 0, 0, 0.25 );
+}
+#main
+{
+    position: relative;
+    margin: 0 auto;
+    padding: 0.5em 0;
+    width: 100%;
+    max-width: 640px;
+    color: #202020;
+    z-index: 10;
+    overflow: hidden;
+}
+#main .index
+{
+    margin-top: 0.6em;
+}
+#main .index a
+{
+    color: #606060;
+}
+#main .index div
+{
+    margin: 0.3em auto;
+}
+#main .index-title
+{
+    padding: 0.2em;
+    border-top: 1px solid rgba( 0, 0, 0, 0.1 );
+    border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
+    background-color: rgba( 127, 127, 127, 0.1 );
+}
+#main .index-title a
+{
+    color: #404040;
+}
+#main > p
+{
+    margin: 0.5em 2em;
+}
+#main > div
+{
+    margin: 1em 2.5em;
+    background-color: #ffffff;
+    border-radius: 0.2em;
+}
+#main > div .title
+{
+    font-weight: bold;
+    color: #404040;
+    text-align: center;
+    text-decoration: underline;
+    margin: 0.5em 0;
+}
+#main > div ol, #main > div ul
+{
+    position: relative;
+    padding: 0 1.5em;
+}
+#main > div ul
+{
+    list-style-type: none;
+}
+#main > div ul li
+{
+    margin-top: 1em;
+}
+#main > div ul li:before
+{
+    content: attr(data-li);
+    display: inline-block;
+    position: absolute;
+    left: 0.5em;
+}
+#main > div .sub
+{
+    padding: 0.2em;
+}
+#main > div .sub .sub-title
+{
+    margin-left: -0.2em;
+}
+#main > div .sub p
+{
+    margin: 0.25em 0 0.5em;
+}
+#main > div .sub a
+{
+    padding: 0 0.1em;
+}
+#main .sec
+{
+    padding: 0.5em 0 0;
+}
+#main .sec.close
+{
+    height: 2.7em;
+    overflow: hidden;
+    opacity: 0.66;
+    transition: opacity 0.2s;
+}
+#main .sec.close:hover
+{
+    opacity: 1;
+}
+.btn
+{
+    cursor: pointer;
+    position: relative;
+}
+.btn a
+{
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+.btn:before
+{
+    content: "[-]";
+    margin-right: 0.2em;
+    font-weight: normal;
+    font-family: monospace;
+    font-size: 0.8em;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    color: #a0a0a0;
+    transition: color 0.4s;
+}
+.btn:hover:before
+{
+    color: #404040;
+}
+.close .btn:before
+{
+    content: "[+]";
+}
+#footer
+{
+    display: inline-block;
+    width: 100%;
+    max-width: 720px;
+    text-align: center;
+    z-index: 5;
+    cursor: default;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+#footer span
+{
+    color: #808080;
+    transition: color 0.5s;
+}
+#footer span:hover
+{
+    color: #404040;
+}
+.center
+{
+    text-align: center;
+}
+.left
+{
+    display: block;
+    float: left;
+    padding: 0 0.2em;
+}
+.right
+{
+    display: block;
+    float: right;
+    padding: 0 0.2em;
+}
+.light
+{
+    color: #a0a0a0;
+}
+.light code, code.light
+{
+    border-color: rgba( 192, 192, 192, 1 );
+}
+.small
+{
+    font-size: 0.75em;
+}
+.hint
+{
+    cursor: help;
+    border-bottom: 1px dashed #404040;
+}
+.light.hint
+{
+    border-bottom: 1px dashed #a0a0a0;
+}
+code
+{
+    border: 0.1em solid rgba( 64, 64, 64, 1 );
+    background-color: #f0f0f0;
+    border-radius: 0.2em;
+    margin: 0.1em 0.2em;
+    padding: 0.1em 0.3em;
+    font-size: 0.80em;
+    white-space: nowrap;
+    overflow: hidden;
+}
+pre.code
+{
+    border: 0.1em solid rgba( 192, 192, 192, 1 );
+    background-color: #f0f0f0;
+    border-radius: 0.2em;
+    margin: 0.2em 0.2em 0.4em;
+    padding: 0.5em 1em;
+    font-size: 0.80em;
+    overflow-x: auto;
+}
+.blank
+{
+    height: 1em;
+}
+.tryit
+{
+    padding: 0.5em 1em;
+    margin: 0.2em 0.2em 0.4em;
+    background-color: rgba( 0, 0, 0, 0.2 );
+    border-radius: 0.2em;
+    font-size: 0.80em;
+}
+.try-title
+{
+    color: #606060;
+    margin: 0 0 0.4em;
+}
+.try-title:before
+{
+    content: "\000BB";
+    padding: 0 0.3em;
+}
+.try-content
+{
+    position: relative;
+    margin: 0 auto 0.2em;
+    text-align: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.try-content span
+{
+    display: inline-block;
+    padding: 0 0.4em;
+    vertical-align: middle;
+}
+.try-content input[type="text"]
+{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    height: 1.2em;
+    line-height: 1.2em;
+    padding: 0.1em 0.2em;
+    margin: 0;
+    outline: none;
+    background-color: rgba( 255, 255, 255, 0.5 );
+    border: 1px solid rgba( 255, 255, 255, 0.4 );
+    border-radius: 1px;
+    font-size: 1em;
+    color: #707070;
+}
+.try-content input[type="checkbox"]
+{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+.try-content select
+{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    height: 1.6em;
+    line-height: 1.6em;
+    padding: 0;
+    margin: 0;
+    background-color: rgba( 255, 255, 255, 0.7 );
+    border: 1px solid rgba( 255, 255, 255, 0.4 );
+    border-radius: 1px;
+    color: #404040;
+    text-align: center;
+}
+.try-content select option
+{
+    height: 1.2em;
+    line-height: 1.2em;
+    padding: 0;
+    margin: 0;
+}
+.try-content input:hover, .try-content select:hover
+{
+    color: #404040;
+    background-color: rgba( 255, 255, 255, 0.8 );
+    border: 1px solid rgba( 30, 114, 173, 0.8 );
+    box-shadow: 0 0 4px rgba( 30, 114, 173, 0.2 );
+}
+.try-content input:focus, .try-content select:focus
+{
+    color: #404040;
+    background-color: rgba( 255, 255, 255, 0.8 );
+    border: 1px solid rgba( 30, 114, 173, 0.8 );
+    box-shadow: 0 0 4px rgba( 30, 114, 173, 0.2 );
+}
+.color-box
+{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    height: 1.4em;
+    background-color: transparent;
+    border: 1px solid rgba( 255, 255, 255, 0.1 );
+    border-radius: 1px;
+}
+.try-content span.color-back
+{
+    width: 20%;
+    height: 1.4em;
+    padding: 0;
+    background-color: #fff;
+}
+.sbr
+{
+    display: none;
+}
+#try_1
+{
+    width: 60%;
+}
+#try_2
+{
+    width: 25%;
+}
+.t2 span.color-back
+{
+    width: 10%;
+}
+#try_3
+{
+    width: 40%;
+}
+.t3 span.color-back
+{
+    width: 15%;
+}
+#try_4_1
+{
+    width: 40%;
+}
+#try_4_2
+{
+    width: 10%;
+}
+#sel_4
+{
+    width: 30%;
+}
+#try_5_1
+{
+    width: 60%;
+}
+#try_5_2
+{
+    width: 60%;
+}
+#try_6
+{
+    width: 25%;
+}
+#try_7_1, #try_7_2
+{
+    width: 25%;
+}
+.t7 span
+{
+    color: #606060;
+}
+#colors
+{
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 0.8em;
+    border-collapse: collapse;
+}
+#colors tr.head th
+{
+    border-top: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+}
+#colors tr td
+{
+    border-left: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+    color: #606060;
+    padding: 0.2em;
+}
+#colors tr:nth-child(even)
+{
+    background-color: #ffffff;
+}
+#colors tr:nth-child(odd)
+{
+    background-color: #f0f0f0;
+}
+#colors tr td:nth-child(1)
+{
+    width: 12%;
+    color: #404040;
+}
+#colors tr td:nth-child(2)
+{
+    width: 18%;
+}
+#colors tr td:nth-child(3)
+{
+    width: 6%;
+}
+#colors tr td:nth-child(4)
+{
+    width: 18%;
+}
+#colors tr td:nth-child(5)
+{
+    width: 18%;
+}
+#colors tr td:nth-child(6)
+{
+    width: 6%;
+}
+#colors tr td:nth-child(7)
+{
+    width: 12%;
+}
+#colors tr.s
+{
+    border-top: 1px solid #909090;
+}
+#colors tr.e
+{
+    border-bottom: 1px solid #909090;
+}
+</style>
+</head>
+<body>
+<div id="all">
+<div id="header">
+<h1>Color Class for JS</h1>
+</div>
+<div id="main">
+<p>CC.js 的核心提供色彩模式之間的簡易轉換與多種色彩調整、混合及產生的功能。</p>
+<p>支援hex、css樣式字串的解析與輸出，並提供css漸層代碼生成。</p>
+<p>以及其他<span class="hint" title="如色彩混合、 Gamma 、白平衡調整、色彩距離、對比色彩等">額外功能</span>。</p>
+<p><span class="light small">支援的色彩模型： RGB 、 HSL 、 HSV 、 CMYK 、 XYZ 、 LAB 、 LUV 、 LCH 、 LMS 、 DKL 、灰階</span></p>
+<p><span class="light small">另外附加實驗性色彩集類別 Color.Set ，提供影像的色彩轉換、調整與</span><span class="light small hint" title="邊緣探測、色彩分析等">其他功能</span><span class="light small">，此項目仍需效能上的優化。</span></p>
+<div class="sec">
+<div class="title"><a id="contact">版本資訊</a></div>
+<div class="center small">
+<p>核心版本: 160410.0</p>
+<p>文件版本: 160412.0</p>
+</div>
+<div class="blank"></div>
+</div>
+<div id="index" class="sec close">
+<div class="title btn" onclick="this.parentNode.classList.toggle('close');"><a>目錄</a></div>
+<ul class="center">
+<li class="index">
+<div class="index-title"><a href="#doc">使用說明</a></div>
+<div><a href="#new-color-object">建立 Color 物件</a></div>
+<div><a href="#conversion">色彩模式轉換</a></div>
+<div><a href="#properties">使用色彩數值</a></div>
+<div><a href="#adjustion">色彩的調整</a></div>
+<div><a href="#blending">色彩混合</a></div>
+<div><a href="#related-color">關聯色彩生成</a></div>
+<div><a href="#miscs">CSS漸層與其他功能</a></div>
+<div><a href="#color-set">色彩集</a></div>
+</li>
+<li class="index">
+<div class="index-title"><a href="#examples">應用範例</a></div>
+<div><a href="#example-1">色輪繪製</a></div>
+<div><a href="#example-2">選彩色盤</a></div>
+<div><a href="#example-3">灰階圖片</a></div>
+<div><a href="#example-4">色彩分析</a></div>
+</li>
+<li class="index">
+<div class="index-title"><a href="#models">色彩模式</a></div>
+<div><a href="#grayscale">灰階</a></div>
+<div><a href="#rgb">RGB</a></div>
+<div><a href="#hsv">HSV</a></div>
+<div><a href="#hsl">HSL</a></div>
+<div><a href="#cmyk">CMYK</a></div>
+<div><a href="#xyz">XYZ</a></div>
+<div><a href="#lab">LAB</a></div>
+<div><a href="#luv">LUV</a></div>
+<div><a href="#lch">LCH</a></div>
+<div><a href="#lms">LMS</a></div>
+<div><a href="#dkl">DKL</a></div>
+</li>
+<li class="index">
+<div class="index-title"><a href="#github">on Github</a></div>
+</li>
+<li class="index">
+<div class="index-title"><a href="#contact">contact / donate</a></div>
+</li>
+</ul>
+<div class="blank"></div>
+</div>
+<div class="sec">
+<div class="title"><a id="doc">使用說明</a></div>
+<ul>
+<li class="sub" data-li="&empty;">
+<div class="sub-title"><a id="new-color-object">建立 Color 物件</a></div>
+<p>
+使用<code>new Color()</code>或<code>Color()</code>建立一個色彩物件。</p>
+<p>基礎使用：</p>
+<pre class="code prettyprint">
+var white_1 = new Color( "rgb", 255, 255, 255, 255 );
+ // 建立alpha值100%的白色
+ // 由於css跟canvas的alpha值範圍不同，輸入採用上限255為主
+ // 但在alpha輸入為1的時候也會自動轉換成255(RGB模式)
+ // 如果需要輸入1/255的alpha值，請輸入1.0
+
+var white_2 = new Color( "cmyk" );
+ // 建立一個CMYK色彩，缺少的欄位會補上最低值(0)，alpha預設為最高值
+
+var black = Color();
+ // 建立黑色，new可以省略，字串參數無法辨識或不存在時會採用RGB模式
+ // 第一個可辨識的字串(模式、數字或可被解析的字串)會被採用
+ 
+var gray = Color( "0.5" );
+ // 使用數字字串會自動採用灰階模式，"0.5"會建立濃度為50%的灰階色彩
+</pre>
+<p>字串解析：</p>
+<pre class="code prettyprint">
+var gray = Color( "#333333" );
+ // 建立hex等於#333333的灰色，接受3碼或6碼的hex值
+ 
+var blue = Color( "rgba( 0, 0, 255, 1 )" );
+ // 從css的rgba代碼建立一個藍色
+
+var xyz = Color( "xyz( 50, 50, 50 )" );
+ // 也支援其他色彩模式的輸入，需注意hsla的alpha值域與css的不同
+
+var lch = Color( "lch, 100, 50, 60" );
+ // 逗號或空格分隔的字串會自動轉換為參數引入
+</pre>
+<p><span class="small light">&smashp; 無法解析時會傳回RGB模式的黑色，但有些包含空格與數值的字串可能會產生灰階物件。</span></p>
+<div class="tryit t1">
+<div class="try-title">範例：輸入參數產生顏色</div>
+<div class="try-content">
+<input type="text" id="try_1" value="#CADCAD"/><span class="light">&rArr;</span><span class="color-back"><label id="color_1" class="color-box" title=""></label></span>
+</div>
+<script>
+(function(){
+    var try_1 = document.getElementById("try_1"),
+        color_1 = document.getElementById("color_1")
+    function ex_1(e)
+    {
+        var color = new Color( try_1.value )
+        color_1.style.backgroundColor = color.css()
+        color_1.title = color.toString( true )
+    }
+    try_1.addEventListener( "keyup", ex_1 )
+    function autoSelect(e)
+    {
+        e.target.select()
+    }
+    try_1.addEventListener( "focus", autoSelect )
+    ex_1()
+})()
+</script>
+</div>
+</li>
+<li class="sub" data-li="&empty;">
+<div class="sub-title"><a id="conversion">色彩模式轉換</a></div>
+<p>主要有兩個方法可以進行轉換：</p>
+<pre class="code">&lt;color&gt;.&lt;color_model&gt;()</pre>
+<pre class="code">&lt;color&gt;.to( color_model, truncation = default_step )</pre>
+<p>模式名稱為小寫，除了11種色彩模式外，轉換還支援<code>hex</code>跟<code>css</code>模式。</p>
+<p><span class="small light">&smashp; 兩者在<code>.to()</code>的情況下會輸出字串且不會改變原物件。</span></p>
+<p><span class="small">範例</span></p>
+<pre class="code prettyprint">
+var red = new Color( 255 ); // 建立RGB模式的紅色
+
+var cmyk_red = red.cmyk();
+ // 取得CMYK模式的紅色，這不會影響原始的red物件
+
+red.to( "hsv" );
+ // 把red轉換成HSV模式，會自動將數值進行轉換並以模式預設的階段取整
+ // 因為轉換可能存在數值誤差，來回轉換數值可能會不一致
+
+var not_in_srgb = Color( "lab", 100, 100, -50 ); // 看起來像是粉紅色
+not_in_srgb.to( "rgb", 0 );
+ // 使用階段參數設定取整的數值階段，0則不會進行取整，可減低誤差
+ // 如果轉換後超過值域，將會被設為最大/最小值
+
+var not_in_srgb = Color( "lab", 100, 30, -80 ); // 可能是某種淡藍色
+not_in_srgb.to( "rgb", false );
+ // 使用boolean作為階段參數時可以控制是否取整
+ // 無法保證輸出數值會是該模式下的合法數值，但可以將轉換誤差降至最低
+
+red.hex(); // #FF0000
+red.to("css"); // rgb( 255, 0, 0 )
+ // 除了hsl模式外都會轉成rgb，alpha值不為最大值時會輸出成rgba/hsla
+</pre>
+<p><span class="small light">&smashp; 將色彩轉換成灰階時會隨來源模式使用不同的轉換。</span></p>
+<div class="tryit t2">
+<div class="try-title">範例：色彩模式轉換</div>
+<div class="try-content">
+<input type="text" id="try_2" value="#BBCBBC"/><span class="light">&rArr;</span><span class="color-back"><label id="color_2" class="color-box" title=""></label></span><span></span>
+<select id="sel_2" name="sel_2">
+<option value="rgb">RGB</option>
+<option value="hsv">HSV</option>
+<option value="hsl">HSL</option>
+<option value="cmyk">CMYK</option>
+<option value="xyz">XYZ</option>
+<option value="lab">LAB</option>
+<option value="luv">LUV</option>
+<option value="lch">LCH</option>
+<option value="lms">LMS</option>
+<option value="dkl">DKL</option>
+<option value="grayscale">灰階</option>
+<option value="hex">HEX</option>
+<option value="css">CSS</option>
+</select>
+<br class="sbr"><label for="check_2"><input type="checkbox" id="check_2" name="check_2" checked> With alpha</label>
+<pre class="code" id="text_2"></pre>
+</div>
+<script>
+(function(){
+    var try_2 = document.getElementById("try_2"),
+        sel_2 = document.getElementById("sel_2"),
+        check_2 = document.getElementById("check_2"),
+        color_2 = document.getElementById("color_2")
+    function ex_2(e)
+    {
+        var color = new Color( try_2.value )
+        color_2.style.backgroundColor = color.css()
+        color_2.title = color.toString( true )
+        try{
+            var converted = color[sel_2.value]()
+            if( converted instanceof Color ){
+                check_2.disabled = false
+                text_2.innerHTML = converted.truncate(0.01).toString( check_2.checked, 6 )
+            }else if( typeof converted == "string"){
+                check_2.disabled = true
+                text_2.innerHTML = color[sel_2.value]()
+            }
+        }catch(e){
+            text_2.innerHTML = "無法辨識模式"
+        }
+    }
+    try_2.addEventListener( "keyup", ex_2 )
+    sel_2.addEventListener( "change", ex_2 )
+    check_2.addEventListener( "change", ex_2 )
+    function autoSelect(e)
+    {
+        e.target.select()
+    }
+    try_2.addEventListener( "focus", autoSelect )
+    ex_2()
+})()
+</script>
+</div>
+</li>
+<li class="sub" data-li="&empty;">
+<div class="sub-title"><a id="properties">使用色彩數值</a></div>
+<p>每個物件都有快速取得各項數值的方式，基本上依照色彩模式的名稱與順序，例如RGB模式中可使用<code>&lt;rgb&gt;.r</code>或是<code>&lt;rgb&gt;[0]</code>來存取紅色數值。</p>
+<p><span class="small light">&smashp; alpha值不能用array的方式存取。</span></p>
+<pre class="code prettyprint">
+var xyz = Color( "xyz", 50, 80, 60 ); // 淡藍綠色
+
+xyz.x = 10; // x值將會被設為10
+xyz[2] = xyz.x + 5; // z值將會被設為15
+xyz.y -= 10; // y值將會被設為70
+</pre>
+<p>以色彩值名稱取值時會傳回一個參照回色彩物件的Key類別實體，這個實體會保存該色彩值當下的數值(但不會隨著更新)。使用這個Key實體可以更新色彩實體的數值。擁有<code>&lt;key&gt;.value</code>跟<code>&lt;key&gt;.ratio</code>等屬性</p>
+<p><span class="small light">&smashp; 由於會建立對原始色彩物件的參照，在記憶體操作上會比較複雜。</span></p>
+<pre class="code prettyprint">
+var lab = Color( "lab", 50, 60, 10 ); // 酒紅色
+
+var l = lab.l; // l會是一個Key物件，且可以直接進行數值運算
+l.value *= 2 // lab會變成[ 100, 60, 10 ]
+l.ratio = 1.2345 // lab會變成超出了上限的[ 123.45, 60, 10 ]
+
+l.truncate(); // 由於數值可能會在合法範圍外，此時可使用裁切方法
+ // lab會變成[ 100, 60, 10 ]
+
+Color( 12.34, 55, 66 ).r.truncate( 0.1 );
+ // .truncate()接受一個階段參數，可以選擇裁切的最小階段
+ // 會傳回數值為12.3的紅色Key物件，這會影響到原始的色彩物件
+</pre>
+<p>色彩物件也有數值處理的屬性與方法：</p>
+<pre class="code">&lt;color&gt;.mode</pre>
+<pre class="code">&lt;color&gt;.modeWithoutKeys</pre>
+<pre class="code">&lt;color&gt;.array</pre>
+<pre class="code">&lt;color&gt;.arrayWithAlpha</pre>
+<pre class="code">&lt;color&gt;.ratio</pre>
+<pre class="code">&lt;color&gt;.ratioWithAlpha</pre>
+<pre class="code">&lt;color&gt;.truncate()</pre>
+<pre class="code">&lt;color&gt;.reverse()</pre>
+<p><span class="small">範例</span></p>
+<pre class="code prettyprint">
+var luv = Color( "luv", 50, 30, 30, 0.5 ); // 半透明土色
+
+luv.mode = "lab"; // 將luv變成lab模式，不會影響數值
+luv.modeWithoutKeys = "luv"; // 變回luv模式，不產生 .l .u .v 三個屬性
+
+var values = luv.array; // 傳回一個帶有luv三數值的array
+luv.array = [ 0, 0, 0 ]; // luv會變成[ 0, 0, 0, 0.5 ]
+
+values = luv.arrayWithAlpha;
+ // values從[ 50, 30, 30 ]變成[ 0, 0, 0, 0.5 ]
+luv.arrayWithAlpha = [ 50, 30, 30, 1 ] // luv變成不透明土色
+
+var ratios = luv.ratio;
+luv.ratioWithAlpha = ratios.concat(0.5); // luv變回半透明土色
+ // 跟array一樣的操作模式，不過是以比例操作
+ // 以色彩模式中該值的最小值為0，最大值為1，不會進行裁切
+</pre>
+<p>驗證色彩有兩種方法，一個是用<code>&lt;color&gt;.in_scale</code>屬性，他可以確認數值是否在範圍內；而<code>&lt;color&gt;.validate()</code>則會額外確認是否吻合階段。</p>
+<pre class="code prettyprint">
+var c1 = Color( -1 ),
+    c2 = Color( 0.1 ),
+    c3 = Color( 1 );
+
+c1.in_scale; // false
+c1.validate(); // false
+
+c2.in_scale; // true
+c2.validate(); // false
+
+c3.in_scale; // true
+c3.validate(); // true
+</pre>
+<p>
+其他的數值操作方法：</p>
+<pre class="code">&lt;color&gt;.duplicate()</pre>
+<p>建立一個相同而無參照的色彩物件；</p>
+<pre class="code">&lt;color&gt;.restore( &lt;another color&gt; )</pre>
+<p>複製另一個色彩的模式與數值；</p>
+<pre class="code">&lt;color&gt;.compare_with( &lt;another color&gt;, strict_compare = false )</pre>
+<p>進行色彩的比較，會已裁切後的數值進行比較，開啟<code>strict_compare</code>則不會裁切。</p>
+<pre class="code">&lt;color&gt;.distance( &lt;another color&gt;, no_adjustion = false  )</pre>
+<p>計算色彩的距離，會將距離數值調整約在0-1之間，使用<code>no_adjustion</code>則不進行調整。</p>
+<div class="tryit t3">
+<div class="try-title">範例：reverse()</div>
+<div class="try-content">
+<input type="text" id="try_3" value="#9BADCC"/><span class="light">&rArr;</span><span class="color-back"><label id="color_3_1" class="color-box" title=""></label></span><span class="light">&rArr;</span><span class="color-back"><label id="color_3_2" class="color-box" title=""></label></span>
+</div>
+<script>
+(function(){
+    var try_3 = document.getElementById("try_3"),
+        color_3_1 = document.getElementById("color_3_1"),
+        color_3_2 = document.getElementById("color_3_2")
+    function ex_3(e)
+    {
+        var color = new Color( try_3.value )
+        color_3_1.style.backgroundColor = color.css()
+        color_3_1.title = color.toString( true )
+        color.reverse();
+        color_3_2.style.backgroundColor = color.css()
+        color_3_2.title = color.toString( true )
+    }
+    try_3.addEventListener( "keyup", ex_3 )
+    function autoSelect(e)
+    {
+        e.target.select()
+    }
+    try_3.addEventListener( "focus", autoSelect )
+    ex_3()
+})()
+</script>
+</div>
+</li>
+<li class="sub" data-li="&empty;">
+<div class="sub-title"><a id="adjustion">色彩的調整</a></div>
+<p>色彩的調整有色相、彩度以及明度3種，請看以下範例：</p>
+<p class="small">色相</p>
+<pre class="code prettyprint">
+ // 色相 &lt;color&gt;.hue( value, color_model = "hsl" )
+ // 支援名稱中有H的色彩模式，預設以HSL模式轉換
+var red = Color( 255 ); // 純紅，色相為0度
+
+red.hue( 180 ); // 轉180度變成青色
+
+red.hue( "-50%" ); // 以%字串進行比例變換，減少50%的色相(180->90)
+
+red.hue( 30, "lch" );
+ // 以LCH模式轉30度，此時可能會轉到RGB無法呈現的色彩上
+ // 此時會自動裁切到可呈現的範圍內，因此來回轉換可能會變成其他顏色
+ // 轉換後的數值不一定會在階段上，但一定會在範圍內。
+</pre>
+<p class="small">明度</p>
+<pre class="code prettyprint">
+ // 明度 &lt;color&gt;.lightness( value, color_model = "hsl" )
+ // 支援名稱中有L跟V的色彩模式，預設以HSL模式轉換
+var yellow = Color( 255, 255 ); // 純黃，HSL的明度為50
+
+yellow.lightness( +30 ); // 增加30的HSL明度(50->80)
+
+yellow.lightness( "10%" ); // 一樣可以用百分比(80->88)
+
+yellow.lightness( -0.5 );
+ // 當數值介於-1與1之間(不包含)時，將會被自動乘上最小值到最大值的距離
+ // 因此-0.5乘上100等於-50(88->38)
+
+yellow.lightness( -100, "lab" );
+ // 轉換不會作階段裁切，但會在上下限以內(38->0)
+ // 不同色彩模式的明度值不同
+</pre>
+<p class="small">彩度</p>
+<pre class="code prettyprint">
+ // 彩度 &lt;color&gt;.saturation( value, color_model = "hsl" )
+ // 支援名稱中有S的色彩模式，預設以HSL模式轉換
+ // 另外有 &lt;color&gt;.chroma( value, color_model = "lch" )的調整
+var blue = Color( 0, 0, 255 ); // 藍色，彩度為100
+
+blue.saturation( -20 ); // 基本使用跟明度相同(100->80)
+
+blue.saturation( "-25%" ); // 轉換不會作階段裁切(80->60)
+
+blue.saturation( 0.4 ); // 來回轉換誤差相對小(60->100)
+
+blue.chroma( -50 ); // 以lch轉換較難預測結果
+</pre>
+<p class="small">其他色彩調整</p>
+<pre class="code prettyprint">
+ // gamma調整 &lt;color&gt;.gamma( new_gamma, old_gamma = 2.2 )
+ // 預設2.2為sRGB的gamma值
+var g = Color( "0.7" ); // 灰階
+
+g.gamma( 1.8, 2.2 ); // 調整到1.8
+
+ // 白平衡調整 &lt;color&gt;.wb( referance_color )
+var color = Color( 123, 45, 67 ); // 血色
+
+color.wb( Color( 255 ) ); // 以紅色校正，變成青色
+</pre>
+<div class="tryit t4">
+<div class="try-title">範例：色彩調整</div>
+<div class="try-content">
+<input type="text" id="try_4_1" value="#155661"/>
+<select id="sel_4" name="sel_4">
+<option value="hue">色相</option>
+<option value="lightness">亮度</option>
+<option value="saturation">飽和</option>
+<option value="chroma">CHROMA</option>
+</select>
+<input type="text" id="try_4_2" value="30"/>
+</div>
+<div class="try-content">
+<span class="light">&rArr;</span><span class="color-back"><label id="color_4_1" class="color-box" title=""></label></span><span class="light">&rArr;</span><span class="color-back"><label id="color_4_2" class="color-box" title=""></label></span>
+</div>
+<script>
+(function(){
+    var try_4_1 = document.getElementById("try_4_1"),
+        try_4_2 = document.getElementById("try_4_2"),
+        sel_4 = document.getElementById("sel_4"),
+        color_4_1 = document.getElementById("color_4_1"),
+        color_4_2 = document.getElementById("color_4_2")
+    function ex_4(e)
+    {
+        var color = new Color( try_4_1.value )
+        color_4_1.style.backgroundColor = color.css()
+        color_4_1.title = color.toString( true )
+        color[sel_4.value]( try_4_2.value ).truncate()
+        color_4_2.style.backgroundColor = color.css()
+        color_4_2.title = color.toString( true )
+    }
+    try_4_1.addEventListener( "keyup", ex_4 )
+    try_4_2.addEventListener( "keyup", ex_4 )
+    sel_4.addEventListener( "change", ex_4 )
+    function autoSelect(e)
+    {
+        e.target.select()
+    }
+    try_4_1.addEventListener( "focus", autoSelect )
+    try_4_2.addEventListener( "focus", autoSelect )
+    ex_4()
+})()
+</script>
+</div>
+</li>
+<li class="sub" data-li="&empty;">
+<div class="sub-title"><a id="blending">色彩混合</a></div>
+<p>
+在混合方面大多數會轉換成RGB模式進行運算，再轉換回原始模式，提供了幾種功能：</p>
+<pre class="code">&lt;color&gt;.under()</pre>
+<pre class="code ">&lt;color&gt;.over()</pre>
+<pre class="code">&lt;color&gt;.mask_by()</pre>
+<pre class="code">&lt;color&gt;.expose_by()</pre>
+<pre class="code">&lt;color&gt;.add()</pre>
+<pre class="code">&lt;color&gt;.subtract()</pre>
+<pre class="code">&lt;color&gt;.threshold( color_1, color_2 = Color() )</pre>
+<pre class="code">&lt;color&gt;.noise( grayscale = false, alpha = 1 )</pre>
+<p><span class="small">範例</span></p>
+<pre class="code prettyprint">
+var red = Color( 255, 0, 0 ),
+    blue = Color( 0, 0, 255 )
+
+var rob = red.over( blue ); // 紅色在藍色上面
+var bor = red.under( blue ); // 藍色在紅色上面
+var bmr = red.mask_by( blue ); // 以藍色過濾紅色
+var reb = red.expose_by( blue ); // 以藍色重曝紅色
+var rab = red.add( blue ); // 藍色加紅色(數值相加)，不會超過值域
+var rsb = red.subtract( blue ); // 紅色減藍色(數值相減)，不會超過值域
+
+var rsb = red.threshold( blue, blue );
+ // 以數值作為限界去調整原始的顏色，最大最小值依每個數值而變
+ // 以原始模式運算
+ // 這會變成一個藍色
+ 
+var nor = red.noise(); // 產生一個隨機的顏色，並把它疊在紅色上
+ // grayscale參數可以選擇是否使用灰階色彩(true|false)
+ // alpha參數決定隨機顏色的透明度(0-1)
+</pre>
+<div class="tryit t5">
+<div class="try-title">範例：色彩混合</div>
+<div class="try-content">
+<label for="try_5_1"><span>色彩 A</span><input type="text" id="try_5_1" name="try_5_1" value="#234567"/></label>
+</div>
+<div class="try-content">
+<label for="try_5_1"><span>色彩 B</span><input type="text" id="try_5_2" name="try_5_2" value="#765432"/></label>
+</div>
+<div class="try-content">
+<select id="sel_5" name="sel_5">
+<option value="over">A 覆蓋 B</option>
+<option value="under">B 覆蓋 A</option>
+<option value="mask_by">B 遮蓋 A</option>
+<option value="expose_by">B 重曝 A</option>
+<option value="add">A &plus; B</option>
+<option value="subtract">A &minus; B</option>
+<option value="threshold">B 過濾 A</option>
+<option value="noise">雜訊覆蓋 A</option>
+</select>
+</div>
+<div class="try-content">
+<span class="light">&rArr; A</span><span class="color-back"><label id="color_5_1" class="color-box" title=""></label></span><span class="light">&plus; B</span><span class="color-back"><label id="color_5_2" class="color-box" title=""></label></span>
+</div>
+<div class="try-content">
+<span class="light">&rArr;</span><span class="color-back"><label id="color_5_3" class="color-box" title=""></label></span>
+</div>
+<script>
+(function(){
+    var try_5_1 = document.getElementById("try_5_1"),
+        try_5_2 = document.getElementById("try_5_2"),
+        sel_5 = document.getElementById("sel_5"),
+        color_5_1 = document.getElementById("color_5_1"),
+        color_5_2 = document.getElementById("color_5_2"),
+        color_5_3 = document.getElementById("color_5_3")
+    function ex_5(e)
+    {
+        var color_1 = new Color( try_5_1.value ),
+            color_2 = new Color( try_5_2.value )
+        color_5_1.style.backgroundColor = color_1.css()
+        color_5_1.title = color_1.toString( true )
+        color_5_2.style.backgroundColor = color_2.css()
+        color_5_2.title = color_2.toString( true )
+        if( sel_5.value != "noise" )
+        {
+            var color_3 = color_1[sel_5.value]( color_2 ).truncate()
+        }
+        else
+        {
+            color_2 = Color( 255, 255, 255 ).noise()
+            color_5_2.style.backgroundColor = color_2.css()
+            try_5_2.value = color_2.hex()
+            color_5_2.title = color_2.toString( true )
+            var color_3 = color_1.under( color_2 ).truncate()
+        }
+        color_5_3.style.backgroundColor = color_3.css()
+        color_5_3.title = color_3.toString( true )
+    }
+    try_5_1.addEventListener( "keyup", ex_5 )
+    try_5_2.addEventListener( "keyup", ex_5 )
+    sel_5.addEventListener( "change", ex_5 )
+    function autoSelect(e)
+    {
+        e.target.select()
+    }
+    try_5_1.addEventListener( "focus", autoSelect )
+    try_5_2.addEventListener( "focus", autoSelect )
+    ex_5()
+})()
+</script>
+</div>
+</li>
+<li class="sub" data-li="&empty;">
+<div class="sub-title"><a id="related-color">關聯色彩生成</a></div>
+<p>依據選擇的顏色產生其他顏色。</p>
+<p><span class="small">色相</span></p>
+<pre class="code prettyprint">
+ // 接受.hue能使用的模式，預設為HSL模式
+var color = Color( 123, 45, 67 ); // 血色
+
+ // 產生互補色 &lt;color&gt;.complement( color_model = "hsl" )
+color.complement(); // 產生有兩個顏色的array
+
+ // 產生相近色 &lt;color&gt;.adjacent( color_model = "hsl" )
+color.adjacent(); // 產生有兩個顏色的array
+
+ // 產生三角色 &lt;color&gt;.triad( color_model = "hsl" )
+color.triad(); // 產生有三個顏色的array
+
+ // 產生對比色 &lt;color&gt;.light_contrast( color_model = "hsl" )
+color.light_contrast(); // 產生一個看起來有分別的顏色
+
+ // 依顏色產生對比色
+ // &lt;color&gt;.contrast_with( color, color_model = "hsl" )
+color.contrast_with( Color( 255, 255, 255 ).noise() );
+ // 產生一個與兩個顏色都有分別的顏色
+</pre>
+<p><span class="small">明度</span></p>
+<pre class="code prettyprint">
+ // 接受.lightness能使用的模式，預設為HSL模式
+var color = Color( 123, 45, 67 ); // 血色
+
+ // 產生互補色 &lt;color&gt;.shades( color_model = "hsl" )
+color.shades();
+ // 產生有四個顏色的array，分別減0、10%、30%、70%亮度
+ // 對於明度低的色彩較無效果
+</pre>
+<div class="tryit t6">
+<div class="try-title">範例：色彩生成</div>
+<div class="try-content">
+<label for="try_6"><input type="text" id="try_6" name="try_6" value="#A0FACE"/></label>
+<span class="light">&rArr;</span><span class="color-back"><label id="color_6" class="color-box" title=""></label></span>
+<span><select id="sel_6" name="sel_6">
+<option value="complement">互補</option>
+<option value="adjacent">相近</option>
+<option value="triad">三角</option>
+<option value="light_contrast">對比</option>
+<option value="shades">陰影</option>
+</select></span>
+</div>
+<div class="try-content" id="div_6"></div>
+<script>
+(function(){
+    var try_6 = document.getElementById("try_6"),
+        sel_6 = document.getElementById("sel_6"),
+        div_6 = document.getElementById("div_6"),
+        color_6 = document.getElementById("color_6")
+    function ex_6(e)
+    {
+        var color = new Color( try_6.value ),
+            colors = color[sel_6.value]()
+        color_6.style.backgroundColor = color.css()
+        color_6.title = color.toString( true )
+        while( div_6.firstChild )
+        {
+            div_6.firstChild.remove()
+        }
+        if( colors instanceof Color )
+        {
+            colors = [colors]
+        }
+        for( var i in colors )
+        {
+            if( i != 0 )
+            {
+                div_6.appendChild( document.createElement("span") )
+            }
+            colors[i].truncate()
+            var dom = document.createElement("span")
+            dom.className = "color-back"
+            dom.appendChild( document.createElement("label") )
+            dom.firstChild.className = "color-box"
+            dom.firstChild.style.backgroundColor = colors[i].css()
+            dom.firstChild.title = colors[i].toString( true )
+            div_6.appendChild( dom )
+        }
+    }
+    try_6.addEventListener( "keyup", ex_6 )
+    sel_6.addEventListener( "change", ex_6 )
+    function autoSelect(e)
+    {
+        e.target.select()
+    }
+    try_6.addEventListener( "focus", autoSelect )
+    ex_6()
+})()
+</script>
+</div>
+</li>
+<li class="sub" data-li="&empty;">
+<div class="sub-title"><a id="miscs">CSS漸層與其他功能</a></div>
+<p><span class="small">CSS漸層</span></p>
+<pre class="code prettyprint">
+ // CSS有兩種漸層，線性與放射，相對的有兩個函式
+
+ // Color.fn.css_linear_gradient( direction, colors, repeat = 0 )
+var red = Color( 255, 0, 0 ),
+    blue = Color( 0, 0, 255 ),
+    green = Color( 0, 255, 0 );
+
+Color.fn.css_linear_gradient( "to right", [ red, blue, green ] );
+ // 將會產生一個向右間隔相等的紅藍綠漸層
+ // 方向參數使用CSS設定
+ 
+Color.fn.css_linear_gradient( "30deg", [ red, 0, blue, red ], 2 );
+ // 將會產生一個30度角的紅綠漸層，紅在0，藍在66%，紅在100%，並重複1次
+ // 每個顏色的位置為: 索引順序/(長度-1)
+ // 要注意如果在array末端使用空值將會影響到重複次數
+
+ // Color.fn.css_radial_gradient( position, colors, repeat = 0 )
+Color.fn.css_radial_gradient( "", [ red, blue, green ] );
+ // 放射狀的使用方式與線性相同
+ // 形狀與位置參數請參考CSS使用
+</pre>
+<p><span class="small">平均色</span></p>
+<pre class="code prettyprint">
+ // Color.fn.average( color_1, color_2, ... )
+var red = Color( 255, 0, 0 ),
+    blue = Color( 0, 0, 255 ),
+    green = Color( 0, 255, 0 );
+
+Color.fn.average( red, green, blue );
+ // 將會對紅藍綠取平均，產生33%的灰色
+ // 計算方式會隨著第一個顏色的色彩模式而變
+</pre>
+<p><span class="small">除錯</span></p>
+<pre class="code prettyprint">
+ //  &lt;color&gt;.log(
+ //     truncation = true,
+ //     color_model = current_model,
+ //     show_color_box = true )
+Color( 255 ).log(); // 顯示RGB模式的紅色
+
+Color( "cmyk" ).log( 0, "rgb", false );
+ // 把CMYK的白色顯示於RGB模式，並且不顯示色彩方塊
+</pre>
+<p><span class="small">序列化</span></p>
+<pre class="code prettyprint">
+ // &lt;color&gt;.serialize()
+ // 將色彩輸出為array
+var blue = Color( 0, 0, 255 );
+var bar = blue.serialize(); // [ "rgb" , 0, 0, 255 ]
+
+ // &lt;color&gt;.toString(
+ //    with_alpha_ratio = false,
+ //    letter_spacing = 0,
+ //    spacing_character = " " )
+ // 將色彩輸出為字串
+var bs = blue.toString(); // "rgb( 0, 0, 255 )"
+
+blue.toString( true, 3, "0" ); // "rgba( 000, 000, 255, 001 )"
+ // 第一個參數決定是否輸出alpha值
+ // 第二個參數決定數值的排版長度
+ // 第三個參數決定排版填補的字元
+</pre>
+<div class="tryit t7">
+<div class="try-title">範例：色彩漸層/平均色</div>
+<div class="try-content">
+<label for="try_7_1"><input type="text" id="try_7_1" name="try_7_1" value="#ABCDEF"/></label>
+<label for="try_7_2"><input type="text" id="try_7_2" name="try_7_2" value="#901563"/></label>
+</div>
+<div class="try-content">
+<span>漸層 &rArr;</span><span class="color-back"><label id="color_7_1" class="color-box" title=""></label></span>
+<span>平均 &rArr;</span><span class="color-back"><label id="color_7_2" class="color-box" title=""></label></span>
+</div>
+<script>
+(function(){
+    var try_7_1 = document.getElementById("try_7_1"),
+        try_7_2 = document.getElementById("try_7_2"),
+        color_7_1 = document.getElementById("color_7_1"),
+        color_7_2 = document.getElementById("color_7_2")
+    function ex_7(e)
+    {
+        var color1 = new Color( try_7_1.value ),
+            color2 = new Color( try_7_2.value ),
+            color3 = Color.fn.average( color1, color2 )
+            css = Color.fn.css_linear_gradient( "30deg", [color1,color2] )
+        color_7_1.style.backgroundImage = css
+        color_7_1.style.border = "none"
+        color_7_1.title = css
+        color_7_2.style.backgroundColor = color3.css()
+        color_7_2.title = color3.toString( true )
+    }
+    try_7_1.addEventListener( "keyup", ex_7 )
+    try_7_2.addEventListener( "keyup", ex_7 )
+    function autoSelect(e)
+    {
+        e.target.select()
+    }
+    try_7_1.addEventListener( "focus", autoSelect )
+    try_7_2.addEventListener( "focus", autoSelect )
+    ex_7()
+})()
+</script>
+</li>
+<li class="sub" data-li="&empty;">
+<div class="sub-title"><a id="color-set">色彩集</a><span class="light small"> - 實驗性功能</span></div>
+<p><span class="small">建立物件</span></p>
+<pre class="code prettyprint">
+ // new Color.Set( color_1, color_2, ...,
+ //    width = color_instances_number,
+ //    height = ceil(color_instances_number/width) )
+
+ // 讀取canvas的影像
+ // Color.Set.fn.readImageData( ImageData )
+var color_set = Color.Set.fn.readImageData(
+    canvas.getContext("2d")
+          .getImageData( 0, 0, canvas.width, canvas.height )
+);
+</pre>
+<p><span class="small">操作</span></p>
+<pre class="code prettyprint">
+color_set.adjust_size( 100, 100 );
+ // &lt;set&gt;.adjust_size(width = length, height = ceil(length/width))
+ // 調整影像長寬
+
+color_set.get_colors();
+ // &lt;set&gt;.get_colors( position = 0, length = all )
+ // 取得色彩array
+
+color_set.set_color( 0, Color( "#fff" ) );
+ // &lt;set&gt;.set_color( position, color_instance )
+ // 變更指標位置色彩
+
+color_set.insert( [ Color( "#000" ) ], 0 )
+ // &lt;set&gt;.insert( colors, position = after_the_last_color )
+ // 插入色彩於指標位置，會增加影像長度
+
+var color = color_set.average();
+ // &lt;set&gt;.average()
+ // 取得色彩平均值
+
+var red = color_set.get_key_map( "r" );
+ // &lt;set&gt;.get_key_map( key )
+ // 取得單一色值的array
+
+color_set.set_key_type( "g", red );
+ // &lt;set&gt;.set_key_type( key, array )
+ // 以array設定單一色值
+</pre>
+<p><span class="small">輸出</span></p>
+<pre class="code prettyprint">
+var img = color_set.toImageData();
+ // &lt;set&gt;.toImageData()
+ // 輸出為ImageData，可以使用於canvas
+
+var json = color_set.toString();
+ // &lt;set&gt;.toString()
+ // 輸出成JSON格式，可以用Color.Set.fn.parseString()解析
+</pre>
+<p><span class="small">進階運算</span></p>
+<pre class="code prettyprint">
+var r_cm = color_set.get_key_contrast_map( "r" );
+ // &lt;set&gt;.get_key_contrast_map( key )
+ // 取得單一色值上每一點與平均值的差異值的array
+
+var edge = color_set.edge_map();
+ // &lt;set&gt;.edge_map()
+ // 邊緣偵測
+
+var analyse_obj = color_set.analyse();
+ // &lt;set&gt;.analyse()
+ // 色彩分析
+</pre>
+</li>
+</ul>
+</div>
+<div class="sec">
+<div class="title"><a id="examples">應用範例</a></div>
+<ol>
+<li class="sub">
+<div class="sub-title"><a id="example-1" href="./color_wheel.htm" target="_blank">色輪繪製</a></div>
+<div>
+<p>結合了色彩轉換與canvas繪製出特定色彩模式的色輪切面。</p>
+<p><span class="small light">&smashp; 不適合行動裝置</span></p>
+<p><a class="small" href="./color_wheel.htm" target="_blank">範例連結</a></p>
+</div>
+</li>
+<li class="sub">
+<div class="sub-title"><a id="example-2" href="./hp.htm" target="_blank">選彩色盤</a></div>
+<p>以 HSV 色盤為基礎，提供色彩選擇、比較以及產生關聯色彩的功能。</p>
+<p><span class="small light">&smashp; 不適合行動裝置</span></p>
+<p><a class="small" href="./hp.htm" target="_blank">範例連結</a></p>
+</li>
+<li class="sub">
+<div class="sub-title"><a id="example-3" href="./hp.htm" target="_blank">灰階圖片</a><span class="light small"> - 原型</span></div>
+<p>將載入的圖片以不同色彩模式灰階化。</p>
+<p><span class="small light">&smashp; 不適合行動裝置</span></p>
+<p><a class="small" href="./grayscale_worker_cc.htm" target="_blank">範例連結</a></p>
+</li>
+<li class="sub">
+<div class="sub-title"><a id="example-4" href="./cc_analyse.htm" target="_blank">色彩分析</a><span class="light small"> - 原型 - 實驗性功能</span></div>
+<p>讀入圖片進行色彩分析，生成 RGBA 通道圖、平均色彩、標準差、眾數等，並列出代表性色彩。</p>
+<p><span class="small light">&smashp; 不適合行動裝置</span></p>
+<p><a class="small" href="./cc_analyse.htm" target="_blank">範例連結</a></p>
+</li>
+</ol>
+</div>
+<div class="sec">
+<div class="title"><a id="models">色彩模式</a></div>
+<div>
+<table id="colors">
+<tr class="head"><th>模式<br class="sbr">(名稱)</th><th>色值</th><th>索引順序</th><th>最小值</th><th>最大值</th><th>階段</th><th>註記</th></tr>
+<tr class="s"><td>灰階</td><td><a id="grayscale">grayscale</a></td><td>0</td><td>0</td><td>1</td><td>0</td><td></td></tr>
+<tr class="e"><td>(gray<br class="sbr">scale)</td><td>alpha</td><td></td><td>0</td><td>1</td><td>0</td><td></td></tr>
+<tr class="s"><td><a id="rgb">RGB</a></td><td>r</td><td>0</td><td>0</td><td>255</td><td>1</td><td></td></tr>
+<tr><td>(rgb)</td><td>g</td><td>1</td><td>0</td><td>255</td><td>1</td><td></td></tr>
+<tr><td></td><td>b</td><td>2</td><td>0</td><td>255</td><td>1</td><td></td></tr>
+<tr class="e"><td></td><td>alpha</td><td></td><td>0</td><td>255</td><td>1</td><td></td></tr>
+<tr class="s"><td><a id="hsv">HSV</a></td><td>h</td><td>0</td><td>0</td><td>360</td><td>1</td><td>角度</td></tr>
+<tr><td>(hsv)</td><td>s</td><td>1</td><td>0</td><td>100</td><td>1</td><td></td></tr>
+<tr><td></td><td>v</td><td>2</td><td>0</td><td>100</td><td>1</td><td></td></tr>
+<tr class="e"><td></td><td>alpha</td><td></td><td>0</td><td>100</td><td>1</td><td></td></tr>
+<tr class="s"><td><a id="hsl">HSL</a></td><td>h</td><td>0</td><td>0</td><td>360</td><td>1</td><td>角度</td></tr>
+<tr><td>(hsl)</td><td>s</td><td>1</td><td>0</td><td>100</td><td>1</td><td></td></tr>
+<tr><td></td><td>l</td><td>2</td><td>0</td><td>100</td><td>1</td><td></td></tr>
+<tr class="e"><td></td><td>alpha</td><td></td><td>0</td><td>100</td><td>1</td><td></td></tr>
+<tr class="s"><td><a id="cmyk">CMYK</a></td><td>c</td><td>0</td><td>0</td><td>100</td><td>1</td><td></td></tr>
+<tr><td>(cmyk)</td><td>m</td><td>1</td><td>0</td><td>100</td><td>1</td><td></td></tr>
+<tr><td></td><td>y</td><td>2</td><td>0</td><td>100</td><td>1</td><td></td></tr>
+<tr><td></td><td>k</td><td>3</td><td>0</td><td>100</td><td>1</td><td></td></tr>
+<tr class="e"><td></td><td>alpha</td><td></td><td>0</td><td>100</td><td>1</td><td></td></tr>
+<tr class="s"><td><a id="xyz">XYZ</a></td><td>x</td><td>0</td><td>0</td><td>95.047</td><td>0</td><td>d65_2</td></tr>
+<tr><td>(xyz)</td><td>y</td><td>1</td><td>0</td><td>100</td><td>0</td><td>d65_2</td></tr>
+<tr><td></td><td>z</td><td>2</td><td>0</td><td>108.883</td><td>0</td><td>d65_2</td></tr>
+<tr class="e"><td></td><td>alpha</td><td></td><td>0</td><td>1</td><td>0</td><td></td></tr>
+<tr class="s"><td><a id="lab">LAB</a></td><td>l</td><td>0</td><td>0</td><td>100</td><td>0</td><td></td></tr>
+<tr><td>(lab)</td><td>a</td><td>1</td><td>-128</td><td>127</td><td>0</td><td></td></tr>
+<tr><td></td><td>b</td><td>2</td><td>-128</td><td>127</td><td>0</td><td></td></tr>
+<tr class="e"><td></td><td>alpha</td><td></td><td>0</td><td>1</td><td>0</td><td></td></tr>
+<tr class="s"><td><a id="luv">LUV</a></td><td>l</td><td>0</td><td>0</td><td>100</td><td>0</td><td></td></tr>
+<tr><td>(luv)</td><td>u</td><td>1</td><td>-100</td><td>100</td><td>0</td><td></td></tr>
+<tr><td></td><td>v</td><td>2</td><td>-100</td><td>100</td><td>0</td><td></td></tr>
+<tr class="e"><td></td><td>alpha</td><td></td><td>0</td><td>1</td><td>0</td><td></td></tr>
+<tr class="s"><td><a id="lch">LCH</a></td><td>l</td><td>0</td><td>0</td><td>100</td><td>0</td><td></td></tr>
+<tr><td>(lch)</td><td>c</td><td>1</td><td>0</td><td>128</td><td>0</td><td></td></tr>
+<tr><td></td><td>h</td><td>2</td><td>0</td><td>360</td><td>0</td><td>角度</td></tr>
+<tr class="e"><td></td><td>alpha</td><td></td><td>0</td><td>1</td><td>0</td><td></td></tr>
+<tr class="s"><td><a id="lms">LMS</a></td><td>l</td><td>0</td><td>-1</td><td>1</td><td>0</td><td></td></tr>
+<tr><td>(lms)</td><td>m</td><td>1</td><td>-1</td><td>1</td><td>0</td><td></td></tr>
+<tr><td></td><td>s</td><td>2</td><td>-1</td><td>1</td><td>0</td><td></td></tr>
+<tr class="e"><td></td><td>alpha</td><td></td><td>0</td><td>1</td><td>0</td><td></td></tr>
+<tr class="s"><td><a id="dkl">DKL</a></td><td>elevation</td><td>0</td><td>-90</td><td>90</td><td>0</td><td>角度</td></tr>
+<tr><td>(dkl)</td><td>azimuth</td><td>1</td><td>0</td><td>360</td><td>0</td><td>角度</td></tr>
+<tr><td></td><td>contrast</td><td>2</td><td>0</td><td>1</td><td>0</td><td></td></tr>
+<tr class="e"><td></td><td>alpha</td><td></td><td>0</td><td>1</td><td>0</td><td></td></tr>
+</table>
+</div>
+<div class="blank"></div>
+</div>
+<div class="sec">
+<div class="title"><a id="github">on Github</a></div>
+<div class="center">
+<a href="https://github.com/xnedkx/color/">CC.js</a>
+</div>
+<div class="blank"></div>
+</div>
+<div class="sec">
+<div class="title"><a id="contact">contact / donate</a></div>
+<div class="center">
+<p class="small">xnedkx 於 gmail</p>
+</div>
+<div class="blank"></div>
+</div>
+</div>
+<div id="footer">
+<div><span class="left">color class for js / CC.js</span><span class="right">created by xNedKx</span></div>
+</div>
+</div>
+</body>
+</html>

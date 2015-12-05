@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>灰階化</title>
+<script src="cc-min.js"></script>
+</head>
+<body>
+<div>
+<h2>灰階化</h2>
+<div style="font-size: small; color: #666;">請先點左方按鈕載入圖片，再點右方「灰階！」按鈕等候圖片，所有處理皆於用戶端進行，轉換時間視電腦硬體及圖片大小增減；使用較舊的瀏覽器時可能需要等候瀏覽器回應。</div>
+</div>
+<div>
+<input type="file" accept="image/jpeg, image/png, image/gif" id="file"/>
+<select id="ops">
+<option value="rgb">RGB平均[(R+G+B)/3]</option>
+<option value="hsl">HSL亮度[L]</option>
+<option value="hsv">HSV亮度[V]|CMYK亮度[1-K]</option>
+<option value="xyz">XYZ亮度[Y]</option>
+<option value="lab">LAB亮度[L]</option>
+</select>
+<input type="button" value="灰階！" id="btn_rainbow" disabled />
+<input type="button" value="原始圖片" id="btn_reset" disabled />
+<a id="btn_dl" href="#" style="text-decoration:none; cursor: default;"><input type="button" value="存檔" disabled /></a>
+<div id="msg"></div>
+</div>
+<canvas id="can"></canvas>
+<script>
+function setup(){
+var worker = typeof(Worker) !== "undefined" ? new Worker("./grayscale_worker_cc.js") : null;
+var canvas, cc, data, bfil = document.getElementById("btn_rainbow"), bdl = document.getElementById("btn_dl"), bre = document.getElementById("btn_reset"), ops = document.getElementById("ops"), file = document.getElementById("file"), img, raw, res, rai;
+canvas = document.getElementById("can");
+cc = canvas.getContext("2d");
+cc.fillStyle = "#000";
+cc.fillRect(0, 0, canvas.width, canvas.height);
+function getData(){
+    var raw = cc.getImageData(0, 0, canvas.width, canvas.height), arr = [];
+    for(var i = 0; i < canvas.height; i++){
+        arr[i] = [];
+        for(var j = 0; j < canvas.width; j++){
+            //console.log(i,j);
+            var pos = (i * canvas.width + j) * 4;
+            arr[i][j] = [raw.data[pos], raw.data[pos+1], raw.data[pos+2], raw.data[pos+3]];
+        }
+    }
+    return arr;
+}
+if(worker){
+    function getPostMsg(e){
+        cc.fillStyle = e.data.color;
+        cc.fillRect(e.data.x, e.data.y, 1, 1);
+        if(e.data.x == canvas.width - 1 && e.data.y == canvas.height - 1){
+            console.log(performance.now())
+            rai = cc.getImageData(0, 0, canvas.width, canvas.height);
+            bfil.value = "完成！";
+            allow_reset();
+            allow_dl();
+            no_proc();
+            allow_load();
+        }
+    }
+    function hToLeftWorker(){
+        console.log(performance.now())
+        bfil.value = "處理中";
+        no_proc();
+        worker.postMessage({data: cc.getImageData(0, 0, canvas.width, canvas.height), mode: ops.value});
+    }
+    worker.addEventListener("message", getPostMsg, false);
+}
+function img_load(){
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    cc.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+    no_reset();
+    no_dl();
+    allow_proc();
+    URL.revokeObjectURL(img.src);
+    res = cc.getImageData(0, 0, canvas.width, canvas.height);
+    rai = null;
+}
+function img_reset(){
+    cc.putImageData(res, 0, 0);
+    no_reset();
+    no_dl();
+    allow_proc();
+}
+function upload(){
+    img = new Image;
+    img.addEventListener("load", img_load, false);
+    img.src = URL.createObjectURL(file.files[0]);
+}
+function hToLeft(){
+    no_proc();
+    bfil.value = "處理中";
+    var cs = Color.Set.fn.readImageData(cc.getImageData(0, 0, canvas.width, canvas.height))
+    cs.to(ops.value).to("grayscale").to("rgb")
+    cc.putImageData(cs.toImageData(), 0, 0)
+    rai = cc.getImageData(0, 0, canvas.width, canvas.height)
+    bfil.value = "完成！";
+}
+function filter(){
+    if(rai){
+        cc.putImageData(rai, 0, 0);
+        allow_reset();
+        allow_dl();
+        no_proc();
+    }else{
+        no_load();
+        if(worker){
+            hToLeftWorker();
+        }else{
+            hToLeft();
+            allow_reset();
+            allow_dl();
+            allow_load();
+        }
+    }
+}
+function dlimg(){
+    bdl.href = canvas.toDataURL();
+    bdl.download = ops.value+"_" + file.files[0].name;
+}
+function allow_reset(){
+    bre.disabled = false;
+    bre.addEventListener("click", img_reset, false);
+}
+function no_reset(){
+    bre.removeEventListener("click", img_reset, false);
+    bre.disabled = true;
+}
+function allow_proc(){
+    bfil.value = "灰階！"
+    bfil.disabled = false;
+    ops.disabled = false;
+    bfil.addEventListener("click", filter, false);
+}
+function no_proc(){
+    bfil.removeEventListener("click", filter, false);
+    bfil.disabled = true;
+    ops.disabled = true;
+}
+function allow_dl(){
+    bdl.childNodes[0].disabled = false;
+    bdl.addEventListener("click", dlimg, false);
+}
+function no_dl(){
+    bdl.removeEventListener("click", dlimg, false);
+    bdl.childNodes[0].disabled = true;
+}
+function allow_load(){
+    file.addEventListener("change", upload, false);
+    ops.addEventListener("change", upload, false);
+    file.disabled = false;
+}
+function no_load(){
+    file.removeEventListener("change", upload, false);
+    file.disabled = true;
+}
+allow_load();
+}
+window.addEventListener("load", setup, false);
+</script>
+</body>
+</html>
