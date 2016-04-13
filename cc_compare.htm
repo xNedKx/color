@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./cc-min.js"></script>
+<script>
+
+function combination(f, n){
+    var out = [],tmp = [], l = f.length
+    for( var i = 0; i < n; i++ ){
+        tmp.push(i)
+    }
+    while(tmp[0] <= l-n){
+        out.push(tmp.map((function(f){return function(i){return f[i]}})(f)))
+        for( i = n-1; i >= 0; i-- ){
+            if( tmp[i] < l-n+i ){
+                tmp[i]++
+                break
+            }else{
+                tmp[i] = null
+            }
+        }
+        if(i >= 0){
+            for( i++; i < n; i++ ){
+                tmp[i] = tmp[i-1]+1
+            }
+        }else{
+            break
+        }
+    }
+    return out
+}
+
+function padleft( str, len ){
+    str = str.toString()
+    while( str.length < len ){
+        str = " " + str
+    }
+    return str
+}
+
+function createData(){
+    var h = [0, 30, 120, 180],
+        s = [0, 10, 30, 60, 100],
+        v = [0, 10, 20, 50, 80, 100],
+        colors = []
+    for( var i = 0; i < h.length; i++ ){
+        for( var j = 0; j < s.length; j++ ){
+            for( var k = 0; k < v.length; k++ ){
+                colors.push( new Color( "hsv", h[i], s[j], v[k] ) )
+            }
+        }
+    }
+    return combination( colors, 2 )
+}
+
+function show(e){
+    var shows = document.getElementsByClassName("show"), main = document.getElementById("main")
+    if( main.classList.contains("hide") && this.classList.contains("show") ){
+        main.classList.remove("hide")
+    }else{
+        for( var i = 0; i < shows.length; i++ ){
+            shows[i].classList.remove("show")
+        }
+        main.classList.add("hide")
+        this.classList.add("show")
+    }
+}
+
+function createDOM( c1, c2 ){
+    var e1 = document.createElement("div"),
+        e2 = document.createElement("div"),
+        s = document.createElement("pre"),
+        d = document.createElement("div"),
+        dh = c1.h - c2.h,
+        ds = c1.s - c2.s,
+        dv = c1.v - c2.v,
+        de = c1.lch().distance(c2)
+    e1.style.backgroundColor = c1.css()
+    e1.title = c1.hex()
+    e2.style.backgroundColor = c2.css()
+    e2.title = c2.hex()
+    s.innerHTML = "<span class='light'>&Delta;h:</span> "+padleft( dh, 4 )+"<span class='light'>, &Delta;s:</span> "+padleft( ds, 4 )+"<span class='light'>, &Delta;v:</span> "+padleft( dv, 4 )+"<span class='light'>, &Delta;e:</span> "+de.toString().substr(0,14)+"\n<span class='light2'>"+c1.toString(0, 3).substr(3)+" "+c2.toString(0, 3).substr(3)+"</span>\n<span class='light'>"+c1.hex()+" "+c2.hex()+"</span>"
+    d.className = "block"
+    d.dataset.dh = dh
+    d.dataset.ds = ds
+    d.dataset.dv = dv
+    d.dataset.v1 = c1[2]
+    d.dataset.v2 = c2[2]
+    d.dataset.s1 = c1[1]
+    d.dataset.s2 = c2[1]
+    d.dataset.h1 = c1[0]
+    d.dataset.h2 = c2[0]
+    d.dataset.de = de
+    d.addEventListener( "click", show )
+    d.appendChild(s)
+    d.appendChild(e1)
+    d.appendChild(e2)
+    main.appendChild(d)
+}
+
+function sortVSH(a,b){
+    return a.dv-b.dv||a.v-b.v||b.v1-a.v1||b.v2-a.v2||a.ds-b.ds||a.s-b.s||a.s1-b.s1||a.s2-b.s2||a.dh-b.dh||a.h-b.h||a.h1-b.h1||a.h2-b.h2
+}
+
+function sortSVH(a,b){
+    return a.ds-b.ds||a.s-b.s||a.s1-b.s1||a.s2-b.s2||a.dv-b.dv||a.v-b.v||b.v1-a.v1||b.v2-a.v2||a.dh-b.dh||a.h-b.h||a.h1-b.h1||a.h2-b.h2
+}
+
+function sortDVSH(a,b){
+    return a.dv-b.dv||a.v-b.v||a.ds-b.ds||a.s-b.s||a.dh-b.dh||a.h-b.h||b.v1-a.v1||b.v2-a.v2||a.s1-b.s1||a.s2-b.s2||a.h1-b.h1||a.h2-b.h2
+}
+
+function sort( fn ){
+    var blocks = document.getElementsByClassName("block"),
+        main = document.getElementById("main"),
+        sort = []
+    for( var i = 0; i < blocks.length; i++ ){
+        sort.push( { d: blocks[i],
+        h: +blocks[i].dataset.dh > 0 ? 1 : 0,
+        s: +blocks[i].dataset.ds > 0 ? 1 : 0,
+        v: +blocks[i].dataset.dv > 0 ? 1 : 0,
+        dh: Math.abs(+blocks[i].dataset.dh),
+        ds: Math.abs(+blocks[i].dataset.ds),
+        dv: Math.abs(+blocks[i].dataset.dv),
+        v1: +blocks[i].dataset.v1,
+        v2: +blocks[i].dataset.v2,
+        s1: +blocks[i].dataset.s1,
+        s2: +blocks[i].dataset.s2,
+        h1: +blocks[i].dataset.h1,
+        h2: +blocks[i].dataset.h2 } )
+    }
+    sort.sort( fn )
+    for( var i = sort.length-2; i >= 0; i--)
+    {
+        main.insertBefore( sort[i].d, sort[i+1].d )
+    }
+}
+
+function run(){
+    var data = createData()
+    for( var i = 0; i < data.length; i++ ){
+        createDOM.apply( null, data[i] )
+    }
+    sort( sortVSH )
+    document.getElementById("vsh").addEventListener( "click", sort.bind( document.getElementById("vsh"), sortVSH ) )
+    document.getElementById("svh").addEventListener( "click", sort.bind( document.getElementById("svh"), sortSVH ) )
+    document.getElementById("dvsh").addEventListener( "click", sort.bind( document.getElementById("dvsh"), sortDVSH ) )
+}
+
+document.addEventListener( "DOMContentLoaded", run )
+</script>
+<style>
+document, body{
+    margin: 0;
+    overflow-x: hidden;
+}
+#title{
+    position: relative;
+    font-size: 2em;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.1em 0;
+    font-weight: bold;
+    color: #666;
+    background-color: #f0f0f0;
+    cursor: default;
+}
+#btns{
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    font-size: 0.4em;
+    right: 1em;
+    font-weight: normal;
+}
+#main .block{
+    position: relative;
+    width: 100%;
+    height: 3.6em;
+    overflow: hidden;
+    font-size: 0.6em;
+    cursor: pointer;
+}
+#main.hide .block{
+    opacity: 0.07
+}
+#main.hide .block.show{
+    opacity: 1
+}
+#main .block div, #main .block pre{
+    float: left;
+    width: 33.33%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+}
+.block pre{
+    color: #333;
+}
+.light{
+    color: #999;
+}
+.light2{
+    color: #666;
+}
+.block:hover .light, .block:hover .light2{
+    color: initial;
+}
+a[href], a[href]:visited{
+    text-decoration: none;
+    color: #119
+}
+a[href]:hover{
+    text-decoration: underline;
+}
+a[href]:active{
+    text-decoration: none;
+    color: #911
+}
+@media only screen and (max-width: 800px){
+    #main .block{
+        height: 7.2em;
+    }
+    #main .block div{
+        width: 50%;
+        height: 50%;
+    }
+    #main .block pre{
+        text-align: center;
+        width: 100%;
+        height: 50%;
+    }
+}
+</style>
+<title>HSV色彩比較</title>
+</head>
+<body>
+<div id="title">HSV色彩比較<div id="btns"><a href="#" id="vsh">VSH</a>/<a href="#" id="svh">SVH</a>/<a href="#" id="dvsh">DVSH</a></div></div>
+<div id="main"></div>
+</body>
+</html>
