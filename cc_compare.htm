@@ -40,11 +40,7 @@ function padleft( str, len ){
     return str
 }
 
-function createData(){
-    var h = [0, 30, 120, 180],
-        s = [0, 10, 30, 60, 100],
-        v = [0, 10, 20, 50, 80, 100],
-        colors = []
+function createData( h, s, v, colors ){
     for( var i = 0; i < h.length; i++ ){
         for( var j = 0; j < s.length; j++ ){
             for( var k = 0; k < v.length; k++ ){
@@ -139,14 +135,33 @@ function sort( fn ){
 }
 
 function run(){
-    var data = createData()
+    var h = [0, 30, 120, 180],
+        s = [0, 10, 30, 60, 75, 100],
+        v = [0, 10, 20, 50, 80, 90, 100],
+        colors = [],
+        data = createData( h, s, v, colors ),
+        btn_vsh = document.getElementById("btn_vsh"),
+        btn_svh = document.getElementById("btn_svh"),
+        btn_dvsh = document.getElementById("btn_dvsh"),
+        sortFn
+    if( location.hash == "#vsh" ){
+        sortFn = sortVSH
+    }else if( location.hash == "#svh" ){
+        sortFn = sortSVH
+    }else if( location.hash == "#dvsh" ){
+        sortFn = sortDVSH
+    }else{
+        sortFn = sortVSH
+    }
     for( var i = 0; i < data.length; i++ ){
         createDOM.apply( null, data[i] )
     }
-    sort( sortVSH )
-    document.getElementById("vsh").addEventListener( "click", sort.bind( document.getElementById("vsh"), sortVSH ) )
-    document.getElementById("svh").addEventListener( "click", sort.bind( document.getElementById("svh"), sortSVH ) )
-    document.getElementById("dvsh").addEventListener( "click", sort.bind( document.getElementById("dvsh"), sortDVSH ) )
+    sort( sortFn )
+    btn_vsh.addEventListener( "click", sort.bind( btn_vsh, sortVSH ) )
+    btn_svh.addEventListener( "click", sort.bind( btn_svh, sortSVH ) )
+    btn_dvsh.addEventListener( "click", sort.bind( btn_dvsh, sortDVSH ) )
+    document.getElementById("info").innerHTML = "<span>H: [ "+h.join(", ")+" ]</span><br><span>S: [ "+s.join(", ")+" ]</span><br><span>V: [ "+v.join(", ")+" ]</span>"
+    document.getElementById("info2").innerHTML = "<span>Total colors: "+colors.length+"</span><br>Total pairs: "+data.length
 }
 
 document.addEventListener( "DOMContentLoaded", run )
@@ -168,6 +183,17 @@ document, body{
     background-color: #f0f0f0;
     cursor: default;
 }
+#info, #info2{
+    position: relative;
+    text-align: left;
+    font-size: 0.9em;
+    margin: 0 auto;
+    padding: 0.1em 0;
+    color: #999;
+    cursor: default;
+    display: inline-block;
+    vertical-align: text-top;
+}
 #btns{
     position: absolute;
     top: 50%;
@@ -175,6 +201,7 @@ document, body{
     font-size: 0.4em;
     right: 1em;
     font-weight: normal;
+    font-family: monospace;
 }
 #main .block{
     position: relative;
@@ -196,6 +223,9 @@ document, body{
     height: 100%;
     overflow: hidden;
     margin: 0;
+}
+.center{
+    text-align: center;
 }
 .block pre{
     color: #333;
@@ -238,7 +268,8 @@ a[href]:active{
 <title>HSV色彩比較</title>
 </head>
 <body>
-<div id="title">HSV色彩比較<div id="btns"><a href="#" id="vsh">VSH</a>/<a href="#" id="svh">SVH</a>/<a href="#" id="dvsh">DVSH</a></div></div>
+<div id="title">HSV色彩比較<div id="btns">sort: <a href="#vsh" id="btn_vsh">VSH</a> / <a href="#svh" id="btn_svh">SVH</a> / <a href="#d" id="btn_dvsh">D</a></div></div>
+<div class="center"><pre id="info"></pre><pre id="info2"></pre></div>
 <div id="main"></div>
 </body>
 </html>
