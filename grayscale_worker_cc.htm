@@ -28,23 +28,17 @@
 <script>
 function setup(){
 var worker = typeof(Worker) !== "undefined" ? new Worker("./grayscale_worker_cc.js") : null;
-var canvas, cc, data, bfil = document.getElementById("btn_rainbow"), bdl = document.getElementById("btn_dl"), bre = document.getElementById("btn_reset"), ops = document.getElementById("ops"), file = document.getElementById("file"), img, raw, res, rai;
-canvas = document.getElementById("can");
-cc = canvas.getContext("2d");
+var canvas = document.getElementById("can"),
+    cc = canvas.getContext("2d"),
+    bfil = document.getElementById("btn_rainbow"),
+    bdl = document.getElementById("btn_dl"),
+    bre = document.getElementById("btn_reset"),
+    ops = document.getElementById("ops"),
+    file = document.getElementById("file"),
+    img, res, rai;
+
 cc.fillStyle = "#000";
 cc.fillRect(0, 0, canvas.width, canvas.height);
-function getData(){
-    var raw = cc.getImageData(0, 0, canvas.width, canvas.height), arr = [];
-    for(var i = 0; i < canvas.height; i++){
-        arr[i] = [];
-        for(var j = 0; j < canvas.width; j++){
-            //console.log(i,j);
-            var pos = (i * canvas.width + j) * 4;
-            arr[i][j] = [raw.data[pos], raw.data[pos+1], raw.data[pos+2], raw.data[pos+3]];
-        }
-    }
-    return arr;
-}
 if(worker){
     function getPostMsg(e){
         cc.fillStyle = e.data.color;
@@ -66,6 +60,8 @@ if(worker){
         worker.postMessage({data: cc.getImageData(0, 0, canvas.width, canvas.height), mode: ops.value});
     }
     worker.addEventListener("message", getPostMsg, false);
+}else{
+    alert("此瀏覽器無法使用，需要支援worker的瀏覽器。");
 }
 function img_load(){
     canvas.width = img.naturalWidth;
