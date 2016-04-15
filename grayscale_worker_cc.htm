@@ -35,33 +35,47 @@ var canvas = document.getElementById("can"),
     bre = document.getElementById("btn_reset"),
     ops = document.getElementById("ops"),
     file = document.getElementById("file"),
-    img, res, rai;
+    img, res, rai, finish;
 
 cc.fillStyle = "#000";
 cc.fillRect(0, 0, canvas.width, canvas.height);
 if(worker){
     function getPostMsg(e){
-        cc.fillStyle = e.data.color;
-        cc.fillRect(e.data.x, e.data.y, 1, 1);
+        var pos = (e.data.y * rai.width + e.data.x) * 4, c = Math.round(e.data.color*255);
+        rai.data[pos] = c
+        rai.data[pos+1] = c
+        rai.data[pos+2] = c
         if(e.data.x == canvas.width - 1 && e.data.y == canvas.height - 1){
-            console.log(performance.now())
-            rai = cc.getImageData(0, 0, canvas.width, canvas.height);
-            bfil.value = "完成！";
-            allow_reset();
-            allow_dl();
-            no_proc();
-            allow_load();
+            finish = true;
         }
     }
     function hToLeftWorker(){
         console.log(performance.now())
         bfil.value = "處理中";
         no_proc();
-        worker.postMessage({data: cc.getImageData(0, 0, canvas.width, canvas.height), mode: ops.value});
+        finish = false;
+        rai = cc.getImageData(0, 0, canvas.width, canvas.height);
+        worker.postMessage({data: rai, mode: ops.value});
+        requestAnimationFrame(draw);
     }
     worker.addEventListener("message", getPostMsg, false);
 }else{
     alert("此瀏覽器無法使用，需要支援worker的瀏覽器。");
+}
+
+function draw(ts){
+    if( !finish ){
+        cc.putImageData( rai, 0, 0 );
+        requestAnimationFrame(draw);
+    }else{
+        cc.putImageData( rai, 0, 0 );
+        console.log(ts);
+        bfil.value = "完成！";
+        allow_reset();
+        allow_dl();
+        no_proc();
+        allow_load();
+    }
 }
 function img_load(){
     canvas.width = img.naturalWidth;
