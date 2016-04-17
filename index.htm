@@ -627,10 +627,8 @@ pre.code
 <p>基礎使用：</p>
 <pre class="code prettyprint">
 var white_1 = new Color( "rgb", 255, 255, 255, 255 );
- // 建立alpha值100%的白色
- // 由於css跟canvas的alpha值範圍不同，輸入採用上限255為主
- // 但在alpha輸入為1的時候也會自動轉換成255(RGB模式)
- // 如果需要輸入1/255的alpha值，請輸入1.0
+ // 建立alpha值100%的RGB模式的白色
+ // alpha 值的範圍隨模式而異
 
 var white_2 = new Color( "cmyk" );
  // 建立一個CMYK色彩，缺少的欄位會補上最低值(0)，alpha預設為最高值
