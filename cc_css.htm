@@ -301,13 +301,21 @@ div{
 </div>
 <div class="cc-bg-color-thickwhite">
 <h3 class="cc-bg-color-thickwhite">Adjustion Class Names</h3>
-<p class="cc-bg-color-thinblack"><code>[ hue | saturation | lightness | alpha ][ {} | -i | -d ][ {numbers} ][ {} | p ]</code></p>
+<p class="cc-bg-color-thinblack"><code>[ {} | bg- | border- | border-top- | border-right- | border-left- | border-bottom- | text-shadow- | box-shadow- | outline- ][ hue | saturation | lightness | alpha ][ {} | -i | -d ][ {numbers} ][ {} | p ]</code></p>
 <p>First section is the type to be changed.</p>
 <p>Second section is how the value changes, leave black to set to the given value, "-i" means to increase, "-d" means to decrease the value.</p>
 <p>The tailed p means to change value by percentage of current value.</p>
 <p>This type of classes require a color class.</p>
 <p>Ex: <code>cc-color-cc_text lightness-i50p</code></p>
 <p>Ex: <code>cc-border-color-cc_border saturation100</code></p>
+</div>
+<div class="cc-bg-color-thickwhite">
+<h3 class="cc-bg-color-thickwhite">Other Classes</h3>
+<p class="cc-bg-color-thinblack"><code>[ {} | bg- | border- | border-top- | border-right- | border-left- | border-bottom- | text-shadow- | box-shadow- | outline- ][ contrst | overwrite ]</code></p>
+<p>The contrst class set color to contrast color of the original color.</p>
+<p>The overwrite class set "!important" parameter in css and overwrite other color styles.</p>
+<p>Ex: <code>cc-color-cc_text contrast</code></p>
+<p>Ex: <code>cc-border-color-cc_border border-overwrite</code></p>
 </div>
 <div class="cc-bg-color-thickwhite">
 <h3 class="cc-bg-color-thickwhite">Setting Colors</h3>
