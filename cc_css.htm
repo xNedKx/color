@@ -291,15 +291,6 @@ div{
 <div class="flex border cc-bg-color-thinblack cc-border-color-thickblack">
 <div>
 <div class="cc-bg-color-thickwhite">
-<h3 class="cc-bg-color-thickwhite">Adjustion Class Names</h3>
-<p class="cc-bg-color-thinblack"><code>[ hue | saturation | lightness | alpha ][ {} | -i | -d ][ {numbers} ][ {} | p ]</code></p>
-<p>First section is the type to be canhged.</p>
-<p>Second section is how the value changes, leave black to set to the given value, "-i" means to increase, "-d" means to decrease the value.</p>
-<p>The tailed p means to change value by percentage of current value.</p>
-<p>Ex: <code>lightness-i50p</code></p>
-<p>Ex: <code>saturation100</code></p>
-</div>
-<div class="cc-bg-color-thickwhite">
 <h3 class="cc-bg-color-thickwhite">Supported Css Properties</h3>
 <p>To set colors on tag by using class, here is the name rule:</p>
 <p class="cc-bg-color-thinblack"><code>cc-[ {} | bg- | border- | border-top- | border-right- | border-left- | border-bottom- | text-shadow- | box-shadow- | outline- ][ {} | hover- | active- | visited- | focus- ]color-[ {color_name} ]</code></p>
@@ -307,6 +298,16 @@ div{
 <p>There are 2 options can be used, first is the type and the second is the pseudo element.</p>
 <p>Ex: <code>cc-bg-color-white</code></p>
 <p>Ex: <code>cc-outline-hove-color-red</code></p>
+</div>
+<div class="cc-bg-color-thickwhite">
+<h3 class="cc-bg-color-thickwhite">Adjustion Class Names</h3>
+<p class="cc-bg-color-thinblack"><code>[ hue | saturation | lightness | alpha ][ {} | -i | -d ][ {numbers} ][ {} | p ]</code></p>
+<p>First section is the type to be changed.</p>
+<p>Second section is how the value changes, leave black to set to the given value, "-i" means to increase, "-d" means to decrease the value.</p>
+<p>The tailed p means to change value by percentage of current value.</p>
+<p>This type of classes require a color class.</p>
+<p>Ex: <code>cc-color-cc_text lightness-i50p</code></p>
+<p>Ex: <code>cc-border-color-cc_border saturation100</code></p>
 </div>
 <div class="cc-bg-color-thickwhite">
 <h3 class="cc-bg-color-thickwhite">Setting Colors</h3>
