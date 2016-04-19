@@ -296,6 +296,8 @@ div{
 <p>First section is the type to be canhged.</p>
 <p>Second section is how the value changes, leave black to set to the given value, "-i" means to increase, "-d" means to decrease the value.</p>
 <p>The tailed p means to change value by percentage of current value.</p>
+<p>Ex: <code>lightness-i50p</code></p>
+<p>Ex: <code>saturation100</code></p>
 </div>
 <div class="cc-bg-color-thickwhite">
 <h3 class="cc-bg-color-thickwhite">Supported Css Properties</h3>
@@ -303,6 +305,8 @@ div{
 <p class="cc-bg-color-thinblack"><code>cc-[ {} | bg- | border- | border-top- | border-right- | border-left- | border-bottom- | text-shadow- | box-shadow- | outline- ][ {} | hover- | active- | visited- | focus- ]color-[ {color_name} ]</code></p>
 <p>the class name should start with "cc-" and end with "color-[color name]"</p>
 <p>There are 2 options can be used, first is the type and the second is the pseudo element.</p>
+<p>Ex: <code>cc-bg-color-white</code></p>
+<p>Ex: <code>cc-outline-hove-color-red</code></p>
 </div>
 <div class="cc-bg-color-thickwhite">
 <h3 class="cc-bg-color-thickwhite">Setting Colors</h3>
@@ -310,6 +314,8 @@ div{
 <p class="cc-bg-color-thinblack"><code>.cc-set-[ {color_name} ] { color: {color_code}; }</code></p>
 <p>Then the color can be apllied by the class rule.<p>
 <p>You can use javascript to change colors too.</p>
+<p>Ex: <code>.cc-set-primary { color: #f00; }</code></p>
+<p>Ex: <code>.cc-set-whatever { color: #0f0; }</code></p>
 </div>
 <div class="cc-bg-color-thickwhite">
 <h3 class="cc-bg-color-thickwhite">Using Javascript</h3>
@@ -317,24 +323,29 @@ div{
 <div class="cc-bg-color-thinblack">
 <p><code>Color.CSS.setColors( { color_name_1: color_code_1, color_name_2: color_code_2, ... } )</code></p>
 <p>This method overwrite colors and update all css rules.</p>
+<p>Ex: <code>Color.CSS.setColors( { primary: "#00f" } )</code></p>
 </div>
 <div class="cc-bg-color-thinblack">
 <p><code>Color.CSS.getColors( regex or array of regexes )</code></p>
-<p>This method returns matched colors.</p>
+<p>This method returns matched colors. Regexes will be leaded by ^ and be tailed by $.</p>
+<p>Ex: <code>Color.CSS.getColors( [ "cc_.*?" ] )</code></p>
 </div>
 <div class="cc-bg-color-thinblack">
 <p><code>Color.CSS.removeColors( regex or array of regexes )</code></p>
 <p>This method removes matched colors and update color rules.</p>
+<p>Ex: <code>Color.CSS.removeColors( [ "secondary" ] )</code></p>
 </div>
 <div class="cc-bg-color-thinblack">
-<p><code>Color.CSS.setTextShadow( {x: x, y: y, size: size } )</code></p>
+<p><code>Color.CSS.setTextShadow( { x: x, y: y, size: size } )</code></p>
 <p>This method changes the position of cc-text-shadow-color-[color_name] style.</p>
 <p>Default is { x: 0, y: 0, size: "0.3em" }, not taking effect to previous style except update.</p>
+<p>Ex: <code>Color.CSS.setTextShadow( { x: "2px", y: "2px", size: "6px" } )</code></p>
 </div>
 <div class="cc-bg-color-thinblack">
-<p><code>Color.CSS.setBoxShadow( {x: x, y: y, size: size } )</code></p>
+<p><code>Color.CSS.setBoxShadow( { x: x, y: y, size: size } )</code></p>
 <p>This method changes the position of cc-box-shadow-color-[color_name] style.</p>
 <p>Default is { x: 0, y: 0, size: "0.3em" }, not taking effect to previous style except update.</p>
+<p>Ex: <code>Color.CSS.setBoxShadow( { x: "2px", y: "2px", size: "6px" } )</code></p>
 </div>
 <div class="cc-bg-color-thinblack">
 <p><code>Color.CSS.updateRules()</code></p>
