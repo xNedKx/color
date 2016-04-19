@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="./favicon.png" />
+<meta property="og:url" content="https://xnedkx.github.io/color/cc_css.htm"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="cc-css - a css class auto color set helper"/>
+<meta property="og:site_name" content="xNedKx" />
+<meta property="og:description" content="cc-css provides an easy way to use colors in css style. Support dynamic element class changing." />
 <script src="./cc-min.js"></script>
 <script src="./cc-css-min.js"></script>
-<title>test</title>
+<title>cc-css</title>
 <style id="cc_config">
 .cc-set-primary{
     color: #090F02;
@@ -41,130 +49,299 @@ document, body{
     border-width: 1px;
     border-style: solid;
 }
+.flex{
+    display: flex;
+    justify-content: center;
+}
+.cb{
+    width: 5em;
+    height: 1em;
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+.cbi{
+    width: 5em;
+    height: 1.2em;
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+.bt{
+    display: inline-block;
+    vertical-align: text-bottom;
+}
 .sans-serif{
     font-family: sans-serif;
+}
+div{
+    padding: 0.2em;
+    margin: 0.2em 0;
 }
 </style>
 </head>
 <body>
 <div id="main" class="">
-<h1 class="cc-text-shadow-hover-color-cc_light_gray cc-text-shadow-color-cc_medium_gray">Title</h1>
-<div id="text" class="cc-color-cc_text">
-<p class="large bold border cc-color-primary cc-border-color-cc_border_1">primary color</p>
-<div class="cc-bg-color-cc_background_1">
-<p><span class="cc-color-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span> Maecenas fermentum risus risus, eu tincidunt ligula rhoncus pellentesque. Donec sit amet orci justo. Mauris eget rutrum nunc. Proin iaculis mi ac dui rhoncus pulvinar. Donec ut quam ut purus iaculis vehicula. Integer varius ut eros ac fringilla. Mauris eget ante aliquet, sodales odio ac, suscipit quam. Ut pellentesque, velit eu lobortis varius, lectus justo semper orci, non condimentum lacus arcu sed eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam ultrices, nulla sit amet porta egestas, nisl mauris dignissim sem, ut malesuada libero urna sed velit. Cras fermentum lectus urna, a dictum enim euismod a. Curabitur hendrerit eros nibh, a condimentum nulla convallis eget. Phasellus pretium nibh nisi, vel ultrices nunc pulvinar non. Donec scelerisque ligula maximus, sagittis massa sit amet, sodales felis. Proin feugiat metus in viverra lobortis. <span class="cc-color-secondary">Morbi dapibus elit eu dolor auctor, a vehicula lacus condimentum.</span></p>
-<p class="cc-color-cc_text">
-<span class="cc-color-cc_ignore_1">Sed vehicula feugiat malesuada.</span> Praesent vitae nunc non mi congue sodales sit amet sed neque. Morbi egestas, nisi sed fermentum feugiat, tortor lacus euismod leo, at aliquam libero ipsum vel turpis. Suspendisse potenti. <span class="cc-color-cc_ignore_2">Vestibulum non mi in justo elementum ultricies at in orci.</span> Vestibulum sit amet tortor id libero vehicula cursus. Praesent sed arcu elit. Proin non scelerisque tellus. Nullam rutrum pretium tellus, a tempor diam hendrerit in. Donec aliquet euismod eros, a ullamcorper ligula auctor sed. Vivamus at euismod lorem. Nunc varius pretium libero, sit amet iaculis est euismod nec. <span class="cc-color-cc_strong_1">Phasellus pretium mi ac quam dignissim, consectetur pretium nibh tempor.</span> Suspendisse sed ultricies felis.</p>
-<p>
-<span class="cc-color-cc_strong_2">Morbi nec massa nec nisi iaculis eleifend eget non nibh.</span> Proin mi sapien, ultrices eget ante id, pretium bibendum arcu. Aenean fringilla, mauris in vehicula aliquet, magna leo porta lacus, nec faucibus tellus nisi eu mi. Sed commodo mi vitae facilisis viverra. Praesent porta a lorem sit amet sagittis. Fusce a leo libero. Praesent vel mi felis. Nulla pulvinar dui quam, et auctor tortor ultricies in. Aliquam sed accumsan ligula. Nunc varius dictum felis, in facilisis odio euismod quis. Nam a rutrum neque, quis tempus magna.</p>
-<p>
-<span class="cc-bg-color-cc_shade_1">Sed </span><span class="cc-bg-color-cc_shade_2">vestibulum </span><span class="cc-bg-color-cc_shade_3">scelerisque </span><span class="cc-bg-color-cc_shade_4">eros </span>nec vulputate. <span class="cc-color-cc_different_1">Duis </span><span class="cc-color-cc_different_2">non </span><span class="cc-color-cc_different_3">enim </span><span class="cc-color-cc_different_4">bibendum </span><span class="cc-color-cc_different_5">metus </span><span class="cc-color-cc_different_6">condimentum </span><span class="cc-color-cc_different_7">dictum. </span><span class="cc-color-cc_different_8">Etiam </span><span class="cc-color-cc_different_9">vehicula </span>leo nec finibus luctus. Fusce tincidunt vehicula pulvinar. Curabitur a molestie nisl. Aliquam condimentum aliquet lectus, pulvinar tincidunt turpis ullamcorper sit amet. Vestibulum luctus, felis id mollis pellentesque, ante neque placerat leo, ac fringilla orci elit nec nisi. Aenean blandit, lacus vitae finibus viverra, nisl nisl malesuada lectus, id tempus magna tellus sed turpis. Ut malesuada viverra magna, vitae consectetur ligula ornare a. Donec pellentesque posuere orci nec interdum. Quisque at laoreet est, porttitor finibus turpis.</p>
-<p class="sans-serif">
-<span class="cc-bg-color-cc_light_1">Integer tincidunt ex rhoncus malesuada finibus. </span><span class="cc-bg-color-cc_light_2">Proin condimentum euismod lacus at sodales. </span><span class="cc-color-cc_dark_1">Sed hendrerit ligula ex, eget venenatis dolor feugiat blandit. </span><span class="cc-color-cc_dark_2">Donec convallis pharetra justo, sed tristique lacus mattis ut. </span><span class="cc-bg-color-cc_light_gray cc-color-cc_dark_gray">Suspendisse potenti. </span>Nulla viverra turpis lorem, pretium fringilla mi suscipit id. Ut rhoncus odio et erat convallis tristique et ut ipsum. In mollis diam vitae libero pulvinar, eget hendrerit libero tincidunt. Duis vehicula, nisl in varius fermentum, sem enim efficitur sem, ac tincidunt est enim eget lorem. <span class="cc-color-cc_medium_gray">Pellentesque non accumsan velit, et mollis tellus.</span></p>
-<p><a href="#" class="cc-color-cc_link cc-hover-color-cc_link_hover cc-active-color-cc_link_active cc-visited-color-cc_link_visited">a link</a></p>
-</div>
+<h1 class="cc-text-shadow-color-cc_shade_3 cc-text-shadow-hover-color-cc_shade_1 cc-color-cc_dark">CSS class Auto Coloring</h1>
+<div class="cc-color-cc_text cc-bg-color-cc_background border cc-border-color-cc_border cc-box-shadow-color-cc_shadow">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet bibendum orci, a dignissim lectus. Nullam at libero tristique, auctor ligula at, venenatis orci. <span class="cc-color-cc_strong">Etiam accumsan</span>, dolor at consequat viverra, magna justo faucibus velit, vitae dignissim tortor ante id leo. Sed dignissim nec magna eu feugiat. Pellentesque sed tellus vel arcu fringilla suscipit eget nec mi. Nullam eu mauris elit. Maecenas vel nisi at tortor sollicitudin egestas. Donec luctus massa eget urna mattis, ac facilisis elit vestibulum. Vestibulum sit amet magna nec elit semper porttitor. <span class="cc-color-cc_ignore">Mauris lacinia nulla odio.</span> Nunc non lacinia ipsum, a varius mauris.<br><a href="#" class="cc-color-cc_link cc-hover-color-cc_link_hover cc-active-color-cc_link_active cc-visited-color-cc_link_visited">link sample</a></div>
+<div class="cc-color-cc_text_2 cc-bg-color-cc_background_2 border cc-border-color-cc_border_2 cc-box-shadow-color-cc_shadow_2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet bibendum orci, a dignissim lectus. Nullam at libero tristique, auctor ligula at, venenatis orci. <span class="cc-color-cc_strong_2">Etiam accumsan</span>, dolor at consequat viverra, magna justo faucibus velit, vitae dignissim tortor ante id leo. Sed dignissim nec magna eu feugiat. Pellentesque sed tellus vel arcu fringilla suscipit eget nec mi. Nullam eu mauris elit. Maecenas vel nisi at tortor sollicitudin egestas. Donec luctus massa eget urna mattis, ac facilisis elit vestibulum. Vestibulum sit amet magna nec elit semper porttitor. <span class="cc-color-cc_ignore_2">Mauris lacinia nulla odio.</span> Nunc non lacinia ipsum, a varius mauris.<br><a href="#" class="cc-color-cc_link_2 cc-hover-color-cc_link_hover_2 cc-active-color-cc_link_active_2 cc-visited-color-cc_link_visited_2">link sample</a></div>
 <div class="cc-color-gray cc-bg-color-thinblack"><input id="change" type="button" value="toggle color change"></div>
 <div id="inp" class="cc-color-gray cc-bg-color-thinblack">
-<span class="cc-color-primary">primary:</span><input id="pri"><br>
-<span class="cc-color-secondary">secondary:</span><input id="sec">
+<span class="cc-color-primary bt">primary:</span><input id="pri" class="bt"><span class="cbi cc-bg-color-primary cc-box-shadow-color-primary"></span><br>
+<span class="cc-color-secondary bt">secondary:</span><input id="sec" class="bt"><span class="cbi cc-bg-color-secondary cc-box-shadow-color-secondary"></span>
 </div>
-<div id="text" class="cc-color-cc_text_2">
-<p class="large bold border cc-color-secondary cc-border-color-cc_border_2">secondary color</p>
+<div class="flex">
+<div class="cc-bg-color-cc_background">
+<p class="cc-color-cc_text">Set 1 class names</p>
+<p class="cc-color-cc_text">cc-color-cc_text</p>
+<p class="cc-color-cc_link">cc-color-cc_link</p>
+<p class="cc-color-cc_link_hover">cc-color-cc_link_hover</p>
+<p class="cc-color-cc_link_active">cc-color-cc_link_active</p>
+<p class="cc-color-cc_link_visited">cc-color-cc_link_visited</p>
+<p class="cc-color-cc_strong">cc-color-cc_strong</p>
+<p class="cc-color-cc_ignore">cc-color-cc_ignore</p>
+<p class="cc-color-cc_light">cc-color-cc_light</p>
+<p class="cc-color-cc_dark">cc-color-cc_dark</p>
+<p class="cc-color-cc_border">cc-color-cc_border</p>
+<p class="cc-color-cc_shadow">cc-color-cc_shadow</p>
+</div>
+<div class="cc-bg-color-cc_background">
+<p><span class="cb cc-bg-color-transparent"></span></p>
+<p><span class="cb cc-bg-color-cc_text"></span></p>
+<p><span class="cb cc-bg-color-cc_link"></span></p>
+<p><span class="cb cc-bg-color-cc_link_hover"></span></p>
+<p><span class="cb cc-bg-color-cc_link_active"></span></p>
+<p><span class="cb cc-bg-color-cc_link_visited"></span></p>
+<p><span class="cb cc-bg-color-cc_strong"></span></p>
+<p><span class="cb cc-bg-color-cc_ignore"></span></p>
+<p><span class="cb cc-bg-color-cc_light"></span></p>
+<p><span class="cb cc-bg-color-cc_dark"></span></p>
+<p><span class="cb cc-bg-color-cc_border"></span></p>
+<p><span class="cb cc-bg-color-cc_shadow"></span></p>
+</div>
 <div class="cc-bg-color-cc_background_2">
-<p><span class="cc-color-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span> Maecenas fermentum risus risus, eu tincidunt ligula rhoncus pellentesque. Donec sit amet orci justo. Mauris eget rutrum nunc. Proin iaculis mi ac dui rhoncus pulvinar. Donec ut quam ut purus iaculis vehicula. Integer varius ut eros ac fringilla. Mauris eget ante aliquet, sodales odio ac, suscipit quam. Ut pellentesque, velit eu lobortis varius, lectus justo semper orci, non condimentum lacus arcu sed eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam ultrices, nulla sit amet porta egestas, nisl mauris dignissim sem, ut malesuada libero urna sed velit. Cras fermentum lectus urna, a dictum enim euismod a. Curabitur hendrerit eros nibh, a condimentum nulla convallis eget. Phasellus pretium nibh nisi, vel ultrices nunc pulvinar non. Donec scelerisque ligula maximus, sagittis massa sit amet, sodales felis. Proin feugiat metus in viverra lobortis. <span class="cc-color-secondary">Morbi dapibus elit eu dolor auctor, a vehicula lacus condimentum.</span></p>
-<p class="cc-color-cc_text_2">
-<span class="cc-color-cc_ignore_1">Sed vehicula feugiat malesuada.</span> Praesent vitae nunc non mi congue sodales sit amet sed neque. Morbi egestas, nisi sed fermentum feugiat, tortor lacus euismod leo, at aliquam libero ipsum vel turpis. Suspendisse potenti. <span class="cc-color-cc_ignore_2">Vestibulum non mi in justo elementum ultricies at in orci.</span> Vestibulum sit amet tortor id libero vehicula cursus. Praesent sed arcu elit. Proin non scelerisque tellus. Nullam rutrum pretium tellus, a tempor diam hendrerit in. Donec aliquet euismod eros, a ullamcorper ligula auctor sed. Vivamus at euismod lorem. Nunc varius pretium libero, sit amet iaculis est euismod nec. <span class="cc-color-cc_strong_1">Phasellus pretium mi ac quam dignissim, consectetur pretium nibh tempor.</span> Suspendisse sed ultricies felis.</p>
-<p>
-<span class="cc-color-cc_strong_2">Morbi nec massa nec nisi iaculis eleifend eget non nibh.</span> Proin mi sapien, ultrices eget ante id, pretium bibendum arcu. Aenean fringilla, mauris in vehicula aliquet, magna leo porta lacus, nec faucibus tellus nisi eu mi. Sed commodo mi vitae facilisis viverra. Praesent porta a lorem sit amet sagittis. Fusce a leo libero. Praesent vel mi felis. Nulla pulvinar dui quam, et auctor tortor ultricies in. Aliquam sed accumsan ligula. Nunc varius dictum felis, in facilisis odio euismod quis. Nam a rutrum neque, quis tempus magna.</p>
-<p>
-<span class="cc-bg-color-cc_shade_1">Sed </span><span class="cc-bg-color-cc_shade_2">vestibulum </span><span class="cc-bg-color-cc_shade_3">scelerisque </span><span class="cc-bg-color-cc_shade_4">eros </span>nec vulputate. <span class="cc-color-cc_different_1">Duis </span><span class="cc-color-cc_different_2">non </span><span class="cc-color-cc_different_3">enim </span><span class="cc-color-cc_different_4">bibendum </span><span class="cc-color-cc_different_5">metus </span><span class="cc-color-cc_different_6">condimentum </span><span class="cc-color-cc_different_7">dictum. </span><span class="cc-color-cc_different_8">Etiam </span><span class="cc-color-cc_different_9">vehicula </span>leo nec finibus luctus. Fusce tincidunt vehicula pulvinar. Curabitur a molestie nisl. Aliquam condimentum aliquet lectus, pulvinar tincidunt turpis ullamcorper sit amet. Vestibulum luctus, felis id mollis pellentesque, ante neque placerat leo, ac fringilla orci elit nec nisi. Aenean blandit, lacus vitae finibus viverra, nisl nisl malesuada lectus, id tempus magna tellus sed turpis. Ut malesuada viverra magna, vitae consectetur ligula ornare a. Donec pellentesque posuere orci nec interdum. Quisque at laoreet est, porttitor finibus turpis.</p>
-<p class="sans-serif">
-<span class="cc-bg-color-cc_light_1">Integer tincidunt ex rhoncus malesuada finibus. </span><span class="cc-bg-color-cc_light_2">Proin condimentum euismod lacus at sodales. </span><span class="cc-color-cc_dark_1">Sed hendrerit ligula ex, eget venenatis dolor feugiat blandit. </span><span class="cc-color-cc_dark_2">Donec convallis pharetra justo, sed tristique lacus mattis ut. </span><span class="cc-bg-color-cc_light_gray cc-color-cc_dark_gray">Suspendisse potenti. </span>Nulla viverra turpis lorem, pretium fringilla mi suscipit id. Ut rhoncus odio et erat convallis tristique et ut ipsum. In mollis diam vitae libero pulvinar, eget hendrerit libero tincidunt. Duis vehicula, nisl in varius fermentum, sem enim efficitur sem, ac tincidunt est enim eget lorem. <span class="cc-color-cc_medium_gray">Pellentesque non accumsan velit, et mollis tellus.</span></p>
-<p><a href="#" class="cc-color-cc_link cc-hover-color-cc_link_hover cc-active-color-cc_link_active cc-visited-color-cc_link_visited">a link</a></p>
+<p class="cc-color-cc_text_2">Set 2 class names</p>
+<p class="cc-color-cc_text_2">cc-color-cc_text_2</p>
+<p class="cc-color-cc_link_2">cc-color-cc_link_2</p>
+<p class="cc-color-cc_link_hover_2">cc-color-cc_link_hover_2</p>
+<p class="cc-color-cc_link_active_2">cc-color-cc_link_active_2</p>
+<p class="cc-color-cc_link_visited_2">cc-color-cc_link_visited_2</p>
+<p class="cc-color-cc_strong_2">cc-color-cc_strong_2</p>
+<p class="cc-color-cc_ignore_2">cc-color-cc_ignore_2</p>
+<p class="cc-color-cc_light_2">cc-color-cc_light_2</p>
+<p class="cc-color-cc_dark_2">cc-color-cc_dark_2</p>
+<p class="cc-color-cc_border_2">cc-color-cc_border_2</p>
+<p class="cc-color-cc_shadow_2">cc-color-cc_shadow_2</p>
 </div>
-<div class="cc-box-shadow-color-cc_shadow_1">
-<p class="cc-color-cc_text">none</p>
-<p class="cc-color-cc_link">link color</p>
-<p class="cc-color-cc_link_hover">link hover color</p>
-<p class="cc-color-cc_link_active">link active color</p>
-<p class="cc-color-cc_link_visited">link visited color</p>
-<p class="cc-color-cc_strong">strong</p>
-<p class="cc-color-cc_ignore">ignore</p>
-<p class="cc-color-cc_light">light</p>
-<p class="cc-color-cc_dark">dark</p>
+<div class="cc-bg-color-cc_background_2">
+<p><span class="cb cc-bg-color-transparent"></span></p>
+<p><span class="cb cc-bg-color-cc_text_2"></span></p>
+<p><span class="cb cc-bg-color-cc_link_2"></span></p>
+<p><span class="cb cc-bg-color-cc_link_hover_2"></span></p>
+<p><span class="cb cc-bg-color-cc_link_active_2"></span></p>
+<p><span class="cb cc-bg-color-cc_link_visited_2"></span></p>
+<p><span class="cb cc-bg-color-cc_strong_2"></span></p>
+<p><span class="cb cc-bg-color-cc_ignore_2"></span></p>
+<p><span class="cb cc-bg-color-cc_light_2"></span></p>
+<p><span class="cb cc-bg-color-cc_dark_2"></span></p>
+<p><span class="cb cc-bg-color-cc_border_2"></span></p>
+<p><span class="cb cc-bg-color-cc_shadow_2"></span></p>
 </div>
-<div class="cc-bg-color-cc_background border cc-border-color-cc_border">
-<p class="cc-color-cc_text">on background and border</p>
-<p class="cc-color-cc_link">link color</p>
-<p class="cc-color-cc_link_hover">link hover color</p>
-<p class="cc-color-cc_link_active">link active color</p>
-<p class="cc-color-cc_link_visited">link visited color</p>
-<p class="cc-color-cc_strong">strong</p>
-<p class="cc-color-cc_ignore">ignore</p>
-<p class="cc-color-cc_light">light</p>
-<p class="cc-color-cc_dark">dark</p>
 </div>
-<div class="cc-border-color-cc_border border">
-<p class="cc-color-cc_text">border</p>
-<p class="cc-color-cc_link">link color</p>
-<p class="cc-color-cc_link_hover">link hover color</p>
-<p class="cc-color-cc_link_active">link active color</p>
-<p class="cc-color-cc_link_visited">link visited color</p>
-<p class="cc-color-cc_strong">strong</p>
-<p class="cc-color-cc_ignore">ignore</p>
-<p class="cc-color-cc_light">light</p>
-<p class="cc-color-cc_dark">dark</p>
+<div class="cc-bg-color-white"><h3 class="cc-color-black">Shared Colors</h3></div>
+<div class="flex">
+<div class="cc-bg-color-cc_background">
+<p class="cc-color-cc_shade_1">cc-color-cc_shade_1</p>
+<p class="cc-color-cc_shade_2">cc-color-cc_shade_2</p>
+<p class="cc-color-cc_shade_3">cc-color-cc_shade_3</p>
+<p class="cc-color-cc_shade_4">cc-color-cc_shade_4</p>
+<p class="cc-color-cc_light_gray">cc-color-cc_light_gray</p>
+<p class="cc-color-cc_medium_gray">cc-color-cc_medium_gray</p>
+<p class="cc-color-cc_dark_gray">cc-color-cc_dark_gray</p>
+<p class="cc-color-cc_different_1">cc-color-cc_different_1</p>
+<p class="cc-color-cc_different_2">cc-color-cc_different_2</p>
+<p class="cc-color-cc_different_3">cc-color-cc_different_3</p>
+<p class="cc-color-cc_different_4">cc-color-cc_different_4</p>
+<p class="cc-color-cc_different_5">cc-color-cc_different_5</p>
+<p class="cc-color-cc_different_6">cc-color-cc_different_6</p>
+<p class="cc-color-cc_different_7">cc-color-cc_different_7</p>
+<p class="cc-color-cc_different_8">cc-color-cc_different_8</p>
+<p class="cc-color-cc_different_9">cc-color-cc_different_9</p>
 </div>
-<div class="cc-box-shadow-color-cc_shadow_2">
-<p class="cc-color-cc_text_2">none</p>
-<p class="cc-color-cc_link_2">link color</p>
-<p class="cc-color-cc_link_hover_2">link hover color</p>
-<p class="cc-color-cc_link_active_2">link active color</p>
-<p class="cc-color-cc_link_visited_2">link visited color</p>
-<p class="cc-color-cc_strong_2">strong</p>
-<p class="cc-color-cc_ignore_2">ignore</p>
-<p class="cc-color-cc_light_2">light</p>
-<p class="cc-color-cc_dark_2">dark</p>
+<div class="cc-bg-color-cc_background">
+<p><span class="cb cc-bg-color-cc_shade_1"></span></p>
+<p><span class="cb cc-bg-color-cc_shade_2"></span></p>
+<p><span class="cb cc-bg-color-cc_shade_3"></span></p>
+<p><span class="cb cc-bg-color-cc_shade_4"></span></p>
+<p><span class="cb cc-bg-color-cc_light_gray"></span></p>
+<p><span class="cb cc-bg-color-cc_medium_gray"></span></p>
+<p><span class="cb cc-bg-color-cc_dark_gray"></span></p>
+<p><span class="cb cc-bg-color-cc_different_1"></span></p>
+<p><span class="cb cc-bg-color-cc_different_2"></span></p>
+<p><span class="cb cc-bg-color-cc_different_3"></span></p>
+<p><span class="cb cc-bg-color-cc_different_4"></span></p>
+<p><span class="cb cc-bg-color-cc_different_5"></span></p>
+<p><span class="cb cc-bg-color-cc_different_6"></span></p>
+<p><span class="cb cc-bg-color-cc_different_7"></span></p>
+<p><span class="cb cc-bg-color-cc_different_8"></span></p>
+<p><span class="cb cc-bg-color-cc_different_9"></span></p>
 </div>
-<div class="cc-bg-color-cc_background_2 border cc-border-color-cc_border_2">
-<p class="cc-color-cc_text_2">on background and border</p>
-<p class="cc-color-cc_link_2">link color</p>
-<p class="cc-color-cc_link_hover_2">link hover color</p>
-<p class="cc-color-cc_link_active_2">link active color</p>
-<p class="cc-color-cc_link_visited_2">link visited color</p>
-<p class="cc-color-cc_strong_2">strong</p>
-<p class="cc-color-cc_ignore_2">ignore</p>
-<p class="cc-color-cc_light_2">light</p>
-<p class="cc-color-cc_dark_2">dark</p>
+<div class="cc-bg-color-cc_background_2">
+<p class="cc-color-cc_shade_1">cc-color-cc_shade_1</p>
+<p class="cc-color-cc_shade_2">cc-color-cc_shade_2</p>
+<p class="cc-color-cc_shade_3">cc-color-cc_shade_3</p>
+<p class="cc-color-cc_shade_4">cc-color-cc_shade_4</p>
+<p class="cc-color-cc_light_gray">cc-color-cc_light_gray</p>
+<p class="cc-color-cc_medium_gray">cc-color-cc_medium_gray</p>
+<p class="cc-color-cc_dark_gray">cc-color-cc_dark_gray</p>
+<p class="cc-color-cc_different_1">cc-color-cc_different_1</p>
+<p class="cc-color-cc_different_2">cc-color-cc_different_2</p>
+<p class="cc-color-cc_different_3">cc-color-cc_different_3</p>
+<p class="cc-color-cc_different_4">cc-color-cc_different_4</p>
+<p class="cc-color-cc_different_5">cc-color-cc_different_5</p>
+<p class="cc-color-cc_different_6">cc-color-cc_different_6</p>
+<p class="cc-color-cc_different_7">cc-color-cc_different_7</p>
+<p class="cc-color-cc_different_8">cc-color-cc_different_8</p>
+<p class="cc-color-cc_different_9">cc-color-cc_different_9</p>
 </div>
-<div class="cc-border-color-cc_border_2 border">
-<p class="cc-color-cc_text_2">border</p>
-<p class="cc-color-cc_link_2">link color</p>
-<p class="cc-color-cc_link_hover_2">link hover color</p>
-<p class="cc-color-cc_link_active_2">link active color</p>
-<p class="cc-color-cc_link_visited_2">link visited color</p>
-<p class="cc-color-cc_strong_2">strong</p>
-<p class="cc-color-cc_ignore_2">ignore</p>
-<p class="cc-color-cc_light_2">light</p>
-<p class="cc-color-cc_dark_2">dark</p>
+<div class="cc-bg-color-cc_background_2">
+<p><span class="cb cc-bg-color-cc_shade_1"></span></p>
+<p><span class="cb cc-bg-color-cc_shade_2"></span></p>
+<p><span class="cb cc-bg-color-cc_shade_3"></span></p>
+<p><span class="cb cc-bg-color-cc_shade_4"></span></p>
+<p><span class="cb cc-bg-color-cc_light_gray"></span></p>
+<p><span class="cb cc-bg-color-cc_medium_gray"></span></p>
+<p><span class="cb cc-bg-color-cc_dark_gray"></span></p>
+<p><span class="cb cc-bg-color-cc_different_1"></span></p>
+<p><span class="cb cc-bg-color-cc_different_2"></span></p>
+<p><span class="cb cc-bg-color-cc_different_3"></span></p>
+<p><span class="cb cc-bg-color-cc_different_4"></span></p>
+<p><span class="cb cc-bg-color-cc_different_5"></span></p>
+<p><span class="cb cc-bg-color-cc_different_6"></span></p>
+<p><span class="cb cc-bg-color-cc_different_7"></span></p>
+<p><span class="cb cc-bg-color-cc_different_8"></span></p>
+<p><span class="cb cc-bg-color-cc_different_9"></span></p>
 </div>
-<div class="">
-<p class="cc-color-cc_shade_1">shade_1</p>
-<p class="cc-color-cc_shade_2">shade_2</p>
-<p class="cc-color-cc_shade_3">shade_3</p>
-<p class="cc-color-cc_shade_4">shade_4</p>
-<p class="cc-color-cc_light_gray">light_gray</p>
-<p class="cc-color-cc_medium_gray">medium_gray</p>
-<p class="cc-color-cc_dark_gray">dark_gray</p>
-<p class="cc-color-cc_different_1">different_1</p>
-<p class="cc-color-cc_different_2">different_2</p>
-<p class="cc-color-cc_different_3">different_3</p>
-<p class="cc-color-cc_different_4">different_4</p>
-<p class="cc-color-cc_different_5">different_5</p>
-<p class="cc-color-cc_different_6">different_6</p>
-<p class="cc-color-cc_different_7">different_7</p>
-<p class="cc-color-cc_different_8">different_8</p>
-<p class="cc-color-cc_different_9">different_9</p>
+</div>
+<div class="cc-bg-color-white"><h3 class="cc-color-black">Presets Colors</h3></div>
+<div class="flex">
+<div class="cc-bg-color-white">
+<p class="cc-color-white">cc-color-white</p>
+<p class="cc-color-gray">cc-color-gray</p>
+<p class="cc-color-black">cc-color-black</p>
+<p class="cc-color-red">cc-color-red</p>
+<p class="cc-color-orange">cc-color-orange</p>
+<p class="cc-color-yellow">cc-color-yellow</p>
+<p class="cc-color-green">cc-color-green</p>
+<p class="cc-color-blue">cc-color-blue</p>
+<p class="cc-color-purple">cc-color-purple</p>
+<p class="cc-color-thinwhite">cc-color-thinwhite</p>
+<p class="cc-color-thinblack">cc-color-thinblack</p>
+<p class="cc-color-thickwhite">cc-color-thickwhite</p>
+<p class="cc-color-thickblack">cc-color-thickblack</p>
+<p class="cc-color-black">cc-color-transparent</p>
+</div>
+<div class="cc-bg-color-white">
+<p><span class="cb cc-bg-color-white"></span></p>
+<p><span class="cb cc-bg-color-gray"></span></p>
+<p><span class="cb cc-bg-color-black"></span></p>
+<p><span class="cb cc-bg-color-red"></span></p>
+<p><span class="cb cc-bg-color-orange"></span></p>
+<p><span class="cb cc-bg-color-yellow"></span></p>
+<p><span class="cb cc-bg-color-green"></span></p>
+<p><span class="cb cc-bg-color-blue"></span></p>
+<p><span class="cb cc-bg-color-purple"></span></p>
+<p><span class="cb cc-bg-color-thinwhite"></span></p>
+<p><span class="cb cc-bg-color-thinblack"></span></p>
+<p><span class="cb cc-bg-color-thickwhite"></span></p>
+<p><span class="cb cc-bg-color-thickblack"></span></p>
+<p><span class="cb cc-bg-color-transparent"></span></p>
+</div>
+<div class="cc-bg-color-black">
+<p class="cc-color-white">cc-color-white</p>
+<p class="cc-color-gray">cc-color-gray</p>
+<p class="cc-color-black">cc-color-black</p>
+<p class="cc-color-red">cc-color-red</p>
+<p class="cc-color-orange">cc-color-orange</p>
+<p class="cc-color-yellow">cc-color-yellow</p>
+<p class="cc-color-green">cc-color-green</p>
+<p class="cc-color-blue">cc-color-blue</p>
+<p class="cc-color-purple">cc-color-purple</p>
+<p class="cc-color-thinwhite">cc-color-thinwhite</p>
+<p class="cc-color-thinblack">cc-color-thinblack</p>
+<p class="cc-color-thickwhite">cc-color-thickwhite</p>
+<p class="cc-color-thickblack">cc-color-thickblack</p>
+<p class="cc-color-white">cc-color-transparent</p>
+</div>
+<div class="cc-bg-color-black">
+<p><span class="cb cc-bg-color-white"></span></p>
+<p><span class="cb cc-bg-color-gray"></span></p>
+<p><span class="cb cc-bg-color-black"></span></p>
+<p><span class="cb cc-bg-color-red"></span></p>
+<p><span class="cb cc-bg-color-orange"></span></p>
+<p><span class="cb cc-bg-color-yellow"></span></p>
+<p><span class="cb cc-bg-color-green"></span></p>
+<p><span class="cb cc-bg-color-blue"></span></p>
+<p><span class="cb cc-bg-color-purple"></span></p>
+<p><span class="cb cc-bg-color-thinwhite"></span></p>
+<p><span class="cb cc-bg-color-thinblack"></span></p>
+<p><span class="cb cc-bg-color-thickwhite"></span></p>
+<p><span class="cb cc-bg-color-thickblack"></span></p>
+<p><span class="cb cc-bg-color-transparent"></span></p>
+</div>
+</div>
+<div class="flex border cc-bg-color-thinblack cc-border-color-thickblack">
+<div>
+<div class="cc-bg-color-thickwhite">
+<h3 class="cc-bg-color-thickwhite">Adjustion Class Names</h3>
+<p class="cc-bg-color-thinblack"><code>[ hue | saturation | lightness | alpha ][ {} | -i | -d ][ {numbers} ][ {} | p ]</code></p>
+<p>First section is the type to be canhged.</p>
+<p>Second section is how the value changes, leave black to set to the given value, "-i" means to increase, "-d" means to decrease the value.</p>
+<p>The tailed p means to change value by percentage of current value.</p>
+</div>
+<div class="cc-bg-color-thickwhite">
+<h3 class="cc-bg-color-thickwhite">Supported Css Properties</h3>
+<p>To set colors on tag by using class, here is the name rule:</p>
+<p class="cc-bg-color-thinblack"><code>cc-[ {} | bg- | border- | border-top- | border-right- | border-left- | border-bottom- | text-shadow- | box-shadow- | outline- ][ {} | hover- | active- | visited- | focus- ]color-[ {color_name} ]</code></p>
+<p>the class name should start with "cc-" and end with "color-[color name]"</p>
+<p>There are 2 options can be used, first is the type and the second is the pseudo element.</p>
+</div>
+<div class="cc-bg-color-thickwhite">
+<h3 class="cc-bg-color-thickwhite">Setting Colors</h3>
+<p>Setting colors to use is simple, just create a style tag with "cc_config" id and use the rule:</p>
+<p class="cc-bg-color-thinblack"><code>.cc-set-[ {color_name} ] { color: {color_code}; }</code></p>
+<p>Then the color can be apllied by the class rule.<p>
+<p>You can use javascript to change colors too.</p>
+</div>
+<div class="cc-bg-color-thickwhite">
+<h3 class="cc-bg-color-thickwhite">Using Javascript</h3>
+<p>There are some provided method:</p>
+<div class="cc-bg-color-thinblack">
+<p><code>Color.CSS.setColors( { color_name_1: color_code_1, color_name_2: color_code_2, ... } )</code></p>
+<p>This method overwrite colors and update all css rules.</p>
+</div>
+<div class="cc-bg-color-thinblack">
+<p><code>Color.CSS.getColors( regex or array of regexes )</code></p>
+<p>This method returns matched colors.</p>
+</div>
+<div class="cc-bg-color-thinblack">
+<p><code>Color.CSS.removeColors( regex or array of regexes )</code></p>
+<p>This method removes matched colors and update color rules.</p>
+</div>
+<div class="cc-bg-color-thinblack">
+<p><code>Color.CSS.setTextShadow( {x: x, y: y, size: size } )</code></p>
+<p>This method changes the position of cc-text-shadow-color-[color_name] style.</p>
+<p>Default is { x: 0, y: 0, size: "0.3em" }, not taking effect to previous style except update.</p>
+</div>
+<div class="cc-bg-color-thinblack">
+<p><code>Color.CSS.setBoxShadow( {x: x, y: y, size: size } )</code></p>
+<p>This method changes the position of cc-box-shadow-color-[color_name] style.</p>
+<p>Default is { x: 0, y: 0, size: "0.3em" }, not taking effect to previous style except update.</p>
+</div>
+<div class="cc-bg-color-thinblack">
+<p><code>Color.CSS.updateRules()</code></p>
+<p>This method update color rules.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
