@@ -9,84 +9,135 @@
 <meta property="og:title" content="cc-css - a css class auto color set helper"/>
 <meta property="og:site_name" content="xNedKx" />
 <meta property="og:description" content="cc-css provides an easy way to use colors in css style. Support dynamic element class changing." />
+<link href='https://fonts.googleapis.com/css?family=Bitter|Amaranth' rel='stylesheet' type='text/css'>
 <script src="./cc-min.js"></script>
 <script src="./cc-css-min.js"></script>
 <title>cc-css</title>
 <style id="cc_config">
-.cc-set-primary{
+.cc-set-primary {
     color: #090F02;
 }
-.cc-set-bg{
+.cc-set-bg {
     color: #f0f0f0;
 }
 </style>
 <style>
-document, body{
+document, body {
     margin: 0;
-    font-family: serif;
+    font-family: 'Bitter', serif;
+    font-size: 0.9em;
 }
-#main{
+#main {
+    position: relative;
     width: 70%;
     overflow: hidden;
     margin: 0 auto;
-    left: 10%;
-    padding: 0 5%;
     text-align: center;
 }
-#text{
+#text {
     padding: 8px 10px;
 }
-.bold{
+.bold {
     font-weight: bold;
 }
-.small{
+.small {
     font-size: 0.8em;
 }
-.large{
+.large {
     font-size: 1.25em;
 }
-.border{
+.border {
     border-width: 1px;
     border-style: solid;
+    border-color: transparent;
 }
-.flex{
+.outline {
+    outline-width: 1px;
+    outline-style: solid;
+    outline-color: transparent;
+}
+.flex {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
-.cb{
+.cb {
     width: 5em;
     height: 1em;
     display: inline-block;
     vertical-align: text-bottom;
 }
-.cbi{
-    width: 5em;
-    height: 1.2em;
+.bt {
     display: inline-block;
-    vertical-align: text-bottom;
 }
-.bt{
-    display: inline-block;
-    vertical-align: text-bottom;
-}
-.sans-serif{
-    font-family: sans-serif;
-}
-div{
+div {
     padding: 0.2em;
     margin: 0.2em 0;
+}
+.text-title {
+    display: inline-block;
+}
+.round-box {
+    padding: 0.1em 0;
+    border-radius: 0.1em;
+}
+.sbr {
+    display: none;
+}
+@media only screen and (max-width: 768px){
+    #main {
+        width: 100%;
+        padding: 0;
+        left: 0;
+    }
+    .sbr {
+        display: inline;
+    }
+}
+.ex {
+    color: #666;
+    background-color: rgba( 127, 127, 127, 0.1 );
+}
+.code-title, .code {
+    display: inline-block;
+    border-radius: 0.1em;
+    font-size: 1.1em;
+    font-weight: bold;
+    background-color: rgba( 127, 127, 127, 0.1 );
+    padding: 0.2em 0.4em;
+}
+span[class^=cc-] {
+    font-family: "Amaranth", sans-serif;
 }
 </style>
 </head>
 <body>
 <div id="main" class="">
 <h1 class="cc-text-shadow-color-cc_shade_3 cc-text-shadow-hover-color-cc_shade_1 cc-color-cc_dark">CSS class Auto Coloring</h1>
-<div class="cc-color-cc_text cc-bg-color-cc_background border cc-border-color-cc_border cc-box-shadow-color-cc_shadow">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet bibendum orci, a dignissim lectus. Nullam at libero tristique, auctor ligula at, venenatis orci. <span class="cc-color-cc_strong">Etiam accumsan</span>, dolor at consequat viverra, magna justo faucibus velit, vitae dignissim tortor ante id leo. Sed dignissim nec magna eu feugiat. Pellentesque sed tellus vel arcu fringilla suscipit eget nec mi. Nullam eu mauris elit. Maecenas vel nisi at tortor sollicitudin egestas. Donec luctus massa eget urna mattis, ac facilisis elit vestibulum. Vestibulum sit amet magna nec elit semper porttitor. <span class="cc-color-cc_ignore">Mauris lacinia nulla odio.</span> Nunc non lacinia ipsum, a varius mauris.<br><a href="#" class="cc-color-cc_link cc-hover-color-cc_link_hover cc-active-color-cc_link_active cc-visited-color-cc_link_visited">link sample</a></div>
-<div class="cc-color-cc_text_2 cc-bg-color-cc_background_2 border cc-border-color-cc_border_2 cc-box-shadow-color-cc_shadow_2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet bibendum orci, a dignissim lectus. Nullam at libero tristique, auctor ligula at, venenatis orci. <span class="cc-color-cc_strong_2">Etiam accumsan</span>, dolor at consequat viverra, magna justo faucibus velit, vitae dignissim tortor ante id leo. Sed dignissim nec magna eu feugiat. Pellentesque sed tellus vel arcu fringilla suscipit eget nec mi. Nullam eu mauris elit. Maecenas vel nisi at tortor sollicitudin egestas. Donec luctus massa eget urna mattis, ac facilisis elit vestibulum. Vestibulum sit amet magna nec elit semper porttitor. <span class="cc-color-cc_ignore_2">Mauris lacinia nulla odio.</span> Nunc non lacinia ipsum, a varius mauris.<br><a href="#" class="cc-color-cc_link_2 cc-hover-color-cc_link_hover_2 cc-active-color-cc_link_active_2 cc-visited-color-cc_link_visited_2">link sample</a></div>
-<div class="cc-color-gray cc-bg-color-thinblack"><input id="change" type="button" value="toggle color change"></div>
+<div class="cc-color-cc_text cc-bg-color-cc_background cc-border-color-cc_border cc-box-shadow-color-cc_shadow">
+<h4 class="cc-text-shadow-color-cc_shadow">Auto Color Set 1</h4>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut <span class="cc-color-cc_light_gray">light_gray</span> bibendum orci, a <span class="cc-color-cc_medium_gray">medium_gray</span> lectus. <span class="cc-color-cc_dark_gray">Dark_gray</span> at libero tristique, auctor ligula at, venenatis orci. <span class="cc-color-cc_strong">Strong</span>, dolor at consequat viverra, magna justo faucibus velit, vitae dignissim tortor <span class="cc-bg-color-cc_shade_1"> shade_1</span><span class="cc-bg-color-cc_shade_2"> shade 2</span><span class="cc-bg-color-cc_shade_3"> shade 3</span><span class="cc-bg-color-cc_shade_4"> shade 4</span>. Sed dignissim nec magna eu feugiat. Pellentesque<span class="cc-color-cc_shade_4"> shade 4</span><span class="cc-color-cc_shade_3"> shade 3</span><span class="cc-color-cc_shade_2"> shade 2</span><span class="cc-color-cc_shade_1"> shade 1</span> nec mi. Nullam <span class="cc-color-cc_different_1">eu</span> <span class="cc-color-cc_different_2">mauris</span> <span class="cc-color-cc_different_3">elit</span>. <span class="cc-color-cc_different_4">Maecenas</span> <span class="cc-color-cc_different_5">vel</span> <span class="cc-color-cc_different_6">nisi</span> <span class="cc-color-cc_different_7">at</span> <span class="cc-color-cc_different_8">tortor</span> <span class="cc-color-cc_different_9">sollicitudin</span> egestas. Donec luctus massa eget urna <span class="cc-color-cc_light">light</span>, ac <span class="cc-color-cc_dark">dark</span> elit vestibulum. Vestibulum sit amet magna nec elit semper porttitor. <span class="cc-color-cc_ignore">Ignore</span> lacinia nulla odio. Nunc non lacinia ipsum, a varius mauris.</p>
+<p><a href="#" class="cc-color-cc_link cc-hover-color-cc_link_hover cc-active-color-cc_link_active cc-visited-color-cc_link_visited">#link#</a></p>
+<p><span class="cb cc-border-color-cc_border"></span></p>
+</div>
+<div class="cc-color-cc_text_2 cc-bg-color-cc_background_2 cc-border-color-cc_border_2 cc-box-shadow-color-cc_shadow_2">
+<h4 class="cc-text-shadow-color-cc_shadow_2">Auto Color Set 2</h4>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut <span class="cc-color-cc_light_gray">light_gray</span> bibendum orci, a <span class="cc-color-cc_medium_gray">medium_gray</span> lectus. <span class="cc-color-cc_dark_gray">Dark_gray</span> at libero tristique, auctor ligula at, venenatis orci. <span class="cc-color-cc_strong_2">Strong</span>, dolor at consequat viverra, magna justo faucibus velit, vitae dignissim tortor <span class="cc-bg-color-cc_shade_1"> shade_1</span><span class="cc-bg-color-cc_shade_2"> shade 2</span><span class="cc-bg-color-cc_shade_3"> shade 3</span><span class="cc-bg-color-cc_shade_4"> shade 4</span>. Sed dignissim nec magna eu feugiat. Pellentesque<span class="cc-color-cc_shade_4"> shade 4</span><span class="cc-color-cc_shade_3"> shade 3</span><span class="cc-color-cc_shade_2"> shade 2</span><span class="cc-color-cc_shade_1"> shade 1</span> nec mi. Nullam <span class="cc-color-cc_different_1">eu</span> <span class="cc-color-cc_different_2">mauris</span> <span class="cc-color-cc_different_3">elit</span>. <span class="cc-color-cc_different_4">Maecenas</span> <span class="cc-color-cc_different_5">vel</span> <span class="cc-color-cc_different_6">nisi</span> <span class="cc-color-cc_different_7">at</span> <span class="cc-color-cc_different_8">tortor</span> <span class="cc-color-cc_different_9">sollicitudin</span> egestas. Donec luctus massa eget urna <span class="cc-color-cc_light_2">light</span>, ac <span class="cc-color-cc_dark_2">dark</span> elit vestibulum. Vestibulum sit amet magna nec elit semper porttitor. <span class="cc-color-cc_ignore_2">Ignore</span> lacinia nulla odio. Nunc non lacinia ipsum, a varius mauris.</p>
+<p><a href="#" class="cc-color-cc_link_2 cc-hover-color-cc_link_hover_2 cc-active-color-cc_link_active_2 cc-visited-color-cc_link_visited_2">#link#</a></p>
+<p><span class="cb cc-border-color-cc_border_2"></span></p>
+</div>
+<div class="cc-color-gray cc-bg-color-thinblack"><input id="change" type="button" value="toggle auto color generation"></div>
 <div id="inp" class="cc-color-gray cc-bg-color-thinblack">
-<span class="cc-color-primary bt">primary:</span><input id="pri" class="bt"><span class="cbi cc-bg-color-primary cc-box-shadow-color-primary"></span><br>
-<span class="cc-color-secondary bt">secondary:</span><input id="sec" class="bt"><span class="cbi cc-bg-color-secondary cc-box-shadow-color-secondary"></span>
+<div class="bt">
+<div class="cc-color-primary">primary:</div>
+<div><input id="pri" class="" value="#090F02"></div>
+<div class="cb cc-bg-color-primary cc-box-shadow-color-primary"></div>
+</div>
+<div class="bt">
+<div class="cc-color-secondary">secondary:</div>
+<div><input id="sec" class=""></div>
+<div class="cb cc-bg-color-secondary cc-box-shadow-color-secondary"></div>
+</div>
 </div>
 <div class="flex">
 <div class="cc-bg-color-cc_background">
@@ -288,77 +339,144 @@ div{
 <p><span class="cb cc-bg-color-transparent"></span></p>
 </div>
 </div>
-<div class="flex border cc-bg-color-thinblack cc-border-color-thickblack">
+<div class="flex cc-bg-color-thinblack cc-border-color-thickblack">
 <div>
 <div class="cc-bg-color-thickwhite">
-<h3 class="cc-bg-color-thickwhite">Supported Css Properties</h3>
+<h3 class="cc-bg-color-thickwhite text-title">Supported Css Properties</h3>
 <p>To set colors on tag by using class, here is the name rule:</p>
-<p class="cc-bg-color-thinblack"><code>cc-[ {} | bg- | border- | border-top- | border-right- | border-left- | border-bottom- | text-shadow- | box-shadow- | outline- ][ {} | hover- | active- | visited- | focus- ]color-[ {color_name} ]</code></p>
-<p>The class name should start with "cc-" and end with "color-[color name]"</p>
-<p>There are 2 options can be used, first is the type and the second is the pseudo element.</p>
-<p>Ex: <code>cc-bg-color-white</code></p>
-<p>Ex: <code>cc-outline-hover-color-red</code></p>
+<p>
+<p class="cc-bg-color-thinblack code"><code>cc-<br class="sbr">[ &lt;css_type&gt;- or null ]<br class="sbr">[ &lt;pseudo_type&gt;- or null ]<br class="sbr">color-<br class="sbr">[ color_name ]</code></p>
+</p>
+<p>The class name should start with "cc-" and end with "color-[ color name ]"</p>
+<p>The css types are: </p>
+<p>bg-<br>border-<br>border-top-<br>border-right-<br>border-left-<br>border-bottom-<br>text-shadow-<br>box-shadow-<br>outline-</p>
+<p>The pseudo types are: </p>
+<p>hover-<br>active-<br>visited-<br>focus-</p>
+<div class="ex">
+<p>Ex:</p>
+<p><code class="cc-bg-color-orange">cc-bg-color-orange</code></p>
+<p><code class="cc-border-bottom-hover-color-red">cc-border-bottom-hover-color-red</code></p>
+</div>
 </div>
 <div class="cc-bg-color-thickwhite">
-<h3 class="cc-bg-color-thickwhite">Adjustion Class Names</h3>
-<p class="cc-bg-color-thinblack"><code>[ {} | bg- | border- | border-top- | border-right- | border-left- | border-bottom- | text-shadow- | box-shadow- | outline- ][ hue | saturation | lightness | alpha ][ {} | -i | -d ][ {numbers} ][ {} | p ]</code></p>
-<p>First section is the type to be changed.</p>
-<p>Second section is how the value changes, leave black to set to the given value, "-i" means to increase, "-d" means to decrease the value.</p>
-<p>The tailed p means to change value by percentage of current value.</p>
+<h3 class="cc-bg-color-thickwhite text-title">Adjustion Class Names</h3>
+<p>
+<p class="cc-bg-color-thinblack code"><code>[ &lt;css_type&gt;- or null ]<br class="sbr">[ &lt;pseudo_type&gt;- or null ]<br class="sbr">[ adjustion type ]<br class="sbr">[ &lt;option&gt; or null ]<br class="sbr">[ numbers ]<br class="sbr">[ &lt;p_option&gt; or null ]</code></p>
+</p>
+<p>The adjustion types are:</p>
+<p>hue<br>saturation<br>lightness<br>alpha</p>
+<p>The options are:</p>
+<p>-i<br>-d</p>
+<p>"-i" means to increase the type by number, "-d" means to decrease.</p>
+<p>P option:</p>
+<p>p</p>
+<p>The p option has only one possibile value "p" for using the number as percentage.</p>
 <p>This type of classes require a color class.</p>
-<p>Ex: <code>cc-color-cc_text lightness-i50p</code></p>
-<p>Ex: <code>cc-border-color-cc_border saturation100</code></p>
+<div class="ex">
+<p>Ex:</p>
+<p><code class="cc-bg-color-yellow bg-hue-i30">cc-bg-color-yellow bg-hue-i30</code></p>
+<p><code class="cc-outline-hover-color-blue outline-hover-saturation-d50">cc-outline-hover-color-blue <br class="sbr">outline-hover-saturation-d50</code></p>
+<p><code class="cc-color-green lightness-i50p">cc-color-green lightness-i50p</code></p>
+<p><code class="cc-border-color-purple border-alpha50">cc-border-color-purple alpha50</code></p>
+</div>
 </div>
 <div class="cc-bg-color-thickwhite">
-<h3 class="cc-bg-color-thickwhite">Other Classes</h3>
-<p class="cc-bg-color-thinblack"><code>[ {} | bg- | border- | border-top- | border-right- | border-left- | border-bottom- | text-shadow- | box-shadow- | outline- ][ contrst | overwrite ]</code></p>
-<p>The contrst class set color to contrast color of the original color.</p>
-<p>The overwrite class set "!important" parameter in css and overwrite other color styles.</p>
-<p>Ex: <code>cc-color-cc_text contrast</code></p>
-<p>Ex: <code>cc-border-color-cc_border border-overwrite</code></p>
+<h3 class="cc-bg-color-thickwhite text-title">Other Classes</h3>
+<p>
+<p class="cc-bg-color-thinblack code"><code>[ &lt;css_type&gt;- or null ]<br class="sbr">[ &lt;pseudo_type&gt;- or null ]<br class="sbr">[ "contrast" or "overwrite" ]</code></p>
+</p>
+<p>"contrast" sets color to contrast color of the adjusted color.</p>
+<p>"overwrite" append "!important" parameter to the css and overwrite other color styles.</p>
+<div class="ex">
+<p>Ex:</p>
+<p><code class="cc-bg-color-blue bg-saturation70 bg-lightness40 cc-color-blue saturation70 lightness40 contrast overwrite">cc-bg-color-blue bg-saturation70 <br class="sbr">bg-lightness40 cc-color-blue <br class="sbr">saturation70 lightness40 <br class="sbr">contrast overwrite</code></p>
+</div>
 </div>
 <div class="cc-bg-color-thickwhite">
-<h3 class="cc-bg-color-thickwhite">Setting Colors</h3>
+<h3 class="cc-bg-color-thickwhite text-title">Setting Colors</h3>
 <p>Setting colors to use is simple, just create a style tag with "cc_config" id and use the rule:</p>
-<p class="cc-bg-color-thinblack"><code>.cc-set-[ {color_name} ] { color: {color_code}; }</code></p>
+<p>
+<p class="cc-bg-color-thinblack code"><code>.cc-set-[ color_name ]<br class="sbr">{ color: [ color_code ]; }</code></p>
+</p>
 <p>Then the color can be apllied by the class rule.<p>
 <p>You can use javascript to change colors too.</p>
-<p>Ex: <code>.cc-set-primary { color: #f00; }</code></p>
-<p>Ex: <code>.cc-set-whatever { color: #0f0; }</code></p>
+<div class="ex">
+<p>Ex:</p>
+<p><code>&lt;style id="cc_config"&gt;<br>.cc-set-primary { color: #f00; }<br>.cc-set-whatever { color: #0f0; }<br>&lt;/style&gt;</code></p>
+</div>
 </div>
 <div class="cc-bg-color-thickwhite">
-<h3 class="cc-bg-color-thickwhite">Using Javascript</h3>
+<h3 class="cc-bg-color-thickwhite text-title">Using Javascript</h3>
 <p>There are some provided method:</p>
 <div class="cc-bg-color-thinblack">
-<p><code>Color.CSS.setColors( { color_name_1: color_code_1, color_name_2: color_code_2, ... } )</code></p>
+<p class="code-title"><code>Color.CSS.setColors( { <br class="sbr">color_name_1: color_code_1, <br class="sbr">color_name_2: color_code_2, <br class="sbr">... } )</code></p>
 <p>This method overwrite colors and update all css rules.</p>
-<p>Ex: <code>Color.CSS.setColors( { primary: "#00f" } )</code></p>
+<div class="ex">
+<p>Ex:</p>
+<p><code>Color.CSS.setColors( { primary: "#00f" } );</code></p>
+</div>
 </div>
 <div class="cc-bg-color-thinblack">
-<p><code>Color.CSS.getColors( regex or array of regexes )</code></p>
+<p class="code-title"><code>Color.CSS.getColors( regex or <br class="sbr">array of regexes )</code></p>
 <p>This method returns matched colors. Regexes will be leaded by ^ and be tailed by $.</p>
-<p>Ex: <code>Color.CSS.getColors( [ "cc_.*?" ] )</code></p>
+<div class="ex">
+<p>Ex:</p>
+<p><code>Color.CSS.getColors( [ "cc_.*?" ] );</code></p>
+</div>
 </div>
 <div class="cc-bg-color-thinblack">
-<p><code>Color.CSS.removeColors( regex or array of regexes )</code></p>
+<p class="code-title"><code>Color.CSS.removeColors( regex or <br class="sbr">array of regexes )</code></p>
 <p>This method removes matched colors and update color rules.</p>
-<p>Ex: <code>Color.CSS.removeColors( [ "secondary" ] )</code></p>
+<div class="ex">
+<p>Ex:</p>
+<p><code>Color.CSS.removeColors( [ "secondary" ] );</code></p>
+</div>
 </div>
 <div class="cc-bg-color-thinblack">
-<p><code>Color.CSS.setTextShadow( { x: x, y: y, size: size } )</code></p>
+<p class="code-title"><code>Color.CSS.setBorder( { <br class="sbr">style: border_style, <br class="sbr">width: border_width } )</code></p>
+<p>This method changes the parameter applied to borders.</p>
+<p>Default is { style: "solid", width: "1px" }, not taking effect to previous style except update.</p>
+<p>Setting width to 0 or style to "none" will prevent these 2 properties.</p>
+<div class="ex">
+<p>Ex:</p>
+<p><code>Color.CSS.setBorder( { style: "dashed", width: "2px" } );</code></p>
+</div>
+</div>
+<div class="cc-bg-color-thinblack">
+<p class="code-title"><code>Color.CSS.setOutline( { <br class="sbr">style: outline_style, <br class="sbr">width: outline_width } )</code></p>
+<p>This method changes the parameter applied to outlines.</p>
+<p>Default is { style: "solid", width: "1px" }, not taking effect to previous style except update.</p>
+<p>Setting width to 0 or style to "none" will prevent these 2 properties.</p>
+<div class="ex">
+<p>Ex:</p>
+<p><code>Color.CSS.setOutline( { style: "none", width: 0 } );</code></p>
+</div>
+</div>
+<div class="cc-bg-color-thinblack">
+<p class="code-title"><code>Color.CSS.setTextShadow( { <br class="sbr">x: x, y: y, <br class="sbr">size: size } )</code></p>
 <p>This method changes the position of cc-text-shadow-color-[color_name] style.</p>
-<p>Default is { x: 0, y: 0, size: "0.3em" }, not taking effect to previous style except update.</p>
-<p>Ex: <code>Color.CSS.setTextShadow( { x: "2px", y: "2px", size: "6px" } )</code></p>
+<p>Default is { x: 0, y: 0, size: "0.5em" }, not taking effect to previous style except update.</p>
+<div class="ex">
+<p>Ex:</p>
+<p><code>Color.CSS.setTextShadow( { x: "2px", y: "2px", size: "6px" } );</code></p>
+</div>
 </div>
 <div class="cc-bg-color-thinblack">
-<p><code>Color.CSS.setBoxShadow( { x: x, y: y, size: size } )</code></p>
+<p class="code-title"><code>Color.CSS.setBoxShadow( { <br class="sbr">x: x, y: y, <br class="sbr">size: size } )</code></p>
 <p>This method changes the position of cc-box-shadow-color-[color_name] style.</p>
-<p>Default is { x: 0, y: 0, size: "0.3em" }, not taking effect to previous style except update.</p>
-<p>Ex: <code>Color.CSS.setBoxShadow( { x: "2px", y: "2px", size: "6px" } )</code></p>
+<p>Default is { x: 0, y: 0, size: "0.5em" }, not taking effect to previous style except update.</p>
+<div class="ex">
+<p>Ex:</p>
+<p><code>Color.CSS.setBoxShadow( { x: "2px", y: "2px", size: "6px" } );</code></p>
+</div>
 </div>
 <div class="cc-bg-color-thinblack">
-<p><code>Color.CSS.updateRules()</code></p>
+<p class="code-title"><code>Color.CSS.updateRules()</code></p>
 <p>This method update color rules.</p>
+<div class="ex">
+<p>Ex:</p>
+<p><code>Color.CSS.updateRules();</code></p>
+</div>
 </div>
 </div>
 </div>
