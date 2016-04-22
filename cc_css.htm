@@ -126,11 +126,14 @@ span[class^=cc-] {
 <p><a href="#" class="cc-color-cc_link_2 cc-hover-color-cc_link_hover_2 cc-active-color-cc_link_active_2 cc-visited-color-cc_link_visited_2">#link#</a></p>
 <p><span class="cb cc-border-color-cc_border_2"></span></p>
 </div>
-<div class="cc-color-gray cc-bg-color-thinblack"><input id="change" type="button" value="toggle auto color generation"></div>
+<div class="cc-color-gray cc-bg-color-thinblack">
+<div><input id="change" type="button" value="start auto color generation"></div>
+<div><input id="swap" type="button" value="swap colors"></div>
+</div>
 <div id="inp" class="cc-color-gray cc-bg-color-thinblack">
 <div class="bt">
 <div class="cc-color-primary">primary:</div>
-<div><input id="pri" class="" value="#090F02"></div>
+<div><input id="pri" class=""></div>
 <div class="cb cc-bg-color-primary cc-box-shadow-color-primary"></div>
 </div>
 <div class="bt">
@@ -139,6 +142,7 @@ span[class^=cc-] {
 <div class="cb cc-bg-color-secondary cc-box-shadow-color-secondary"></div>
 </div>
 </div>
+<div class="cc-color-gray cc-bg-color-thinblack"><pre id="cfg" class="cc-border-color-thinblack bt"></pre></div>
 <div class="flex">
 <div class="cc-bg-color-cc_background">
 <p class="cc-color-cc_text">Set 1 class names</p>
@@ -499,15 +503,33 @@ function changeColor(){
     })
     document.getElementById("pri").value = pri.hex()
     document.getElementById("sec").value = sec.hex()
+    showCode()
 }
 var h
 function toggle(){
+    var dom = document.getElementById("change")
     if(h){
+        dom.value = "start auto color generation"
         clearInterval(h)
         h = null
     }else{
+        dom.value = "stop auto color generation"
         h = setInterval(changeColor,1000)
     }
+}
+function swapColors(){
+    if(h){
+        document.getElementById("change").value = "start auto color generation"
+        clearInterval(h)
+        h = null
+    }
+    var p = document.getElementById("pri"),
+        s = document.getElementById("sec"),
+        swap = p.value
+    p.value = s.value
+    s.value = swap
+    updatePri.call(p)
+    updateSec.call(s)
 }
 function updatePri(e){
     var v = this.value
@@ -516,6 +538,7 @@ function updatePri(e){
     }else{
         Color.CSS.removeColors(['primary'])
     }
+    showCode()
 }
 function updateSec(e){
     var v = this.value
@@ -524,10 +547,49 @@ function updateSec(e){
     }else{
         Color.CSS.removeColors(['secondary'])
     }
+    showCode()
+}
+function generateCode(){
+    var code = '&lt;script src="https://xnedkx.github.io/color/cc-css-min.js"&gt;&lt;/script&gt;\n\n&lt;style id="cc_config"&gt;\n',
+        colors = Color.CSS.getColors( ["primary","secondary"] ),
+        p = colors.primary,
+        s = colors.secondary
+    if( p ){
+        code += '.cc-set-primary { color: ' + (p.alphaRatio >= 1 ? p.hex() : p.css()) + '; }\n'
+    }
+    if( s ){
+        code += '.cc-set-secondary { color: ' + (s.alphaRatio >= 1 ? s.hex() : s.css()) + '; }\n'
+    }
+    code += '&lt;/style&gt;'
+    return code
+}
+function showCode(){
+    document.getElementById("cfg").innerHTML = generateCode()
 }
 document.getElementById("change").addEventListener("click", toggle)
+document.getElementById("swap").addEventListener("mousedown", swapColors)
 document.getElementById("pri").addEventListener("change", updatePri)
 document.getElementById("sec").addEventListener("change", updateSec)
+
+document.addEventListener( "DOMContentLoaded", function(){
+    function setup(){
+        var colors = Color.CSS.getColors( ["primary","secondary"] ),
+            p = colors.primary,
+            s = colors.secondary
+        if( p || s ){
+            if( p ){
+                document.getElementById("pri").value = p.alphaRatio >= 1 ? p.hex() : p.css()
+            }
+            if( s ){
+                document.getElementById("sec").value = s.alphaRatio >= 1 ? s.hex() : s.css()
+            }
+            showCode()
+        }else{
+            setTimeout(setup,100)
+        }
+    }
+    setup()
+} )
 </script>
 </body>
 </html>
