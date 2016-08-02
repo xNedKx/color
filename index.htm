@@ -658,7 +658,7 @@ var lch = Color( "lch, 100, 50, 60" );
 <div class="tryit t1">
 <div class="try-title">範例：輸入參數產生顏色</div>
 <div class="try-content">
-<input type="text" id="try_1" value="#CADCAD"/><span class="light">&rArr;</span><span class="color-back"><label id="color_1" class="color-box" title=""></label></span>
+<input type="text" id="try_1" value="#CADCAD" class="cs_widget" data-mode="rgb"/><span class="light">&rArr;</span><span class="color-back"><label id="color_1" class="color-box" title=""></label></span>
 </div>
 <script>
 (function(){
@@ -717,7 +717,7 @@ red.to("css"); // rgb( 255, 0, 0 )
 <div class="tryit t2">
 <div class="try-title">範例：色彩模式轉換</div>
 <div class="try-content">
-<input type="text" id="try_2" value="#BBCBBC"/><span class="light">&rArr;</span><span class="color-back"><label id="color_2" class="color-box" title=""></label></span><span></span>
+<input type="text" id="try_2" value="#BBCBBC" class="cs_widget" data-mode="rgb"/><span class="light">&rArr;</span><span class="color-back"><label id="color_2" class="color-box" title=""></label></span><span></span>
 <select id="sel_2" name="sel_2">
 <option value="rgb">RGB</option>
 <option value="hsv">HSV</option>
@@ -856,7 +856,7 @@ c3.validate(); // true
 <div class="tryit t3">
 <div class="try-title">範例：reverse()</div>
 <div class="try-content">
-<input type="text" id="try_3" value="#9BADCC"/><span class="light">&rArr;</span><span class="color-back"><label id="color_3_1" class="color-box" title=""></label></span><span class="light">&rArr;</span><span class="color-back"><label id="color_3_2" class="color-box" title=""></label></span>
+<input type="text" id="try_3" value="#9BADCC" class="cs_widget" data-mode="rgb"/><span class="light">&rArr;</span><span class="color-back"><label id="color_3_1" class="color-box" title=""></label></span><span class="light">&rArr;</span><span class="color-back"><label id="color_3_2" class="color-box" title=""></label></span>
 </div>
 <script>
 (function(){
@@ -950,7 +950,7 @@ color.wb( Color( 255 ) ); // 以紅色校正，變成青色
 <div class="tryit t4">
 <div class="try-title">範例：色彩調整</div>
 <div class="try-content">
-<input type="text" id="try_4_1" value="#155661"/>
+<input type="text" id="try_4_1" value="#155661" class="cs_widget" data-mode="hsv"/>
 <select id="sel_4" name="sel_4">
 <option value="hue">色相</option>
 <option value="lightness">亮度</option>
@@ -1028,10 +1028,10 @@ var nor = red.noise(); // 產生一個隨機的顏色，並把它疊在紅色上
 <div class="tryit t5">
 <div class="try-title">範例：色彩混合</div>
 <div class="try-content">
-<label for="try_5_1"><span>色彩 A</span><input type="text" id="try_5_1" name="try_5_1" value="#234567"/></label>
+<label for="try_5_1"><span>色彩 A</span><input type="text" id="try_5_1" name="try_5_1" value="#234567" class="cs_widget" data-mode="hsv"/></label>
 </div>
 <div class="try-content">
-<label for="try_5_1"><span>色彩 B</span><input type="text" id="try_5_2" name="try_5_2" value="#765432"/></label>
+<label for="try_5_1"><span>色彩 B</span><input type="text" id="try_5_2" name="try_5_2" value="#765432" class="cs_widget" data-mode="hsv"/></label>
 </div>
 <div class="try-content">
 <select id="sel_5" name="sel_5">
@@ -1134,7 +1134,7 @@ color.shades();
 <div class="tryit t6">
 <div class="try-title">範例：色彩生成</div>
 <div class="try-content">
-<label for="try_6"><input type="text" id="try_6" name="try_6" value="#A0FACE"/></label>
+<label for="try_6"><input type="text" id="try_6" name="try_6" value="#A0FACE" class="cs_widget" data-mode="hsv"/></label>
 <span class="light">&rArr;</span><span class="color-back"><label id="color_6" class="color-box" title=""></label></span>
 <span><select id="sel_6" name="sel_6">
 <option value="complement">互補</option>
@@ -1262,8 +1262,8 @@ blue.toString( true, 3, "0" ); // "rgba( 000, 000, 255, 001 )"
 <div class="tryit t7">
 <div class="try-title">範例：色彩漸層/平均色</div>
 <div class="try-content">
-<label for="try_7_1"><input type="text" id="try_7_1" name="try_7_1" value="#ABCDEF"/></label>
-<label for="try_7_2"><input type="text" id="try_7_2" name="try_7_2" value="#901563"/></label>
+<label for="try_7_1"><input type="text" id="try_7_1" name="try_7_1" value="#ABCDEF" class="cs_widget" data-mode="hsv"/></label>
+<label for="try_7_2"><input type="text" id="try_7_2" name="try_7_2" value="#901563" class="cs_widget" data-mode="hsv"/></label>
 </div>
 <div class="try-content">
 <span>漸層 &rArr;</span><span class="color-back"><label id="color_7_1" class="color-box" title=""></label></span>
@@ -1478,6 +1478,7 @@ var analyse_obj = color_set.analyse();
 <div><span class="left">color class for js / CC.js</span><span class="right">created by xNedKx | Copyright reserved</span></div>
 </div>
 </div>
+<script src="./cs_min.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
